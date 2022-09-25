@@ -28,7 +28,7 @@ shuffle($deck);
 # Draw top card and look for match to 0, when that is met, +1 to $progress
 # REMEMBER TO DO 'WHILE DECK IS LARGER THAN 0 SO WE DON'T RETURN A NULL VALUE.
 
-
+# While loop
 var_dump($progress);
 
 # Draw card
