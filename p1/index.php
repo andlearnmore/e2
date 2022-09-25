@@ -4,17 +4,25 @@
 # - uncomment deck cards
 # - remove var_dumps
 
-#require "index-view.php";
+require "index-view.php";
 
 # Create array for the deck of cards.
 $deck = [
-  'red', #'red', 'red', 'red', 'red',
-  'orange', #'orange', 'orange', 'orange', 'orange',
-  'yellow', #'yellow', 'yellow', 'yellow', 'yellow',
-  'green', #'green', 'green', 'green', 'green',
-  'blue', #'blue', 'blue', 'blue', 'blue',
-  'indigo', #'indigo', 'indigo', 'indigo', 'indigo',
-  'violet', #'violet', 'violet', 'violet', 'violet'
+//   'red', 'red', 'red', 'red', 'red',
+//   'orange', 'orange', 'orange', 'orange', 'orange',
+//   'yellow', 'yellow', 'yellow', 'yellow', 'yellow',
+//   'green', 'green', 'green', 'green', 'green',
+//   'blue', 'blue', 'blue', 'blue', 'blue',
+//   'indigo', 'indigo', 'indigo', 'indigo', 'indigo',
+//   'violet', 'violet', 'violet', 'violet', 'violet'
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'indigo',
+  'violet',
+
 ];
 // var_dump($deck[7]);
 
@@ -22,44 +30,49 @@ $deck = [
 $rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
 # Initialize an array for the player's hand
-$Player1Hand = [];
+$player1Hand = [];
 
 # Create a $progress variable to keep track of where in this array we're matching to; start at 0.
 $progress = 0;
 
 # Shuffle deck
-// shuffle($deck);
-var_dump($deck);
+shuffle($deck);
 
-# While loop
-echo("deck count = " . count($deck));
+# Play until the deck is empty, unless the player wins, whichever happens first.
+// Can't use "while (count($deck)) >= 0" because then game goes on forever.
+// If I use "while (count($deck)) > 0" then if the player hasn't won, it tries to draw from an empty deck.
 
 while (count($deck) > 0) {
-    if ($progress > 7) {
+    # If the player wins, let them know and end game.
+    if ($player1Hand == $rainbow) {
         echo("You win!");
         return 1;
     } else {
         # Draw card
         $draw = array_shift($deck);
-        #echo("draw = " . $draw);
-        #echo("deck count = " . count($deck));
-        #var_dump($rainbow[$progress]);
 
         # Check if card drawn matches the card we're looking for.
+        # If it matches, let them know, add one to $progress to advance to next color needed,
+        # add the card to the player's hand.
         if ($draw == $rainbow[$progress]) {
             echo("Your card is " . $draw . " and you were looking for " . $rainbow[$progress] . ".");
             $progress++;
             var_dump($progress);
+            echo("deck count = " . count($deck));
+            array_push($player1Hand, $draw);
+            var_dump($player1Hand);
         } else {
+            # If drawn card doesn't match, don't advance $progress, but deck will decrease by 1.
             echo("No match. Your card is " . $draw . " and you were looking for " . $rainbow[$progress] . ".");
-            var_dump($progress);
+            #var_dump($progress);
+            echo("deck count = " . count($deck));
         };
     };
 };
 
 
+echo("Sorry--no more cards. You lost.");
 
-echo("Deck is empty.");
 
 
 
