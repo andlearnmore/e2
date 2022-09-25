@@ -1,50 +1,70 @@
 <?php
 
-require "index-view.php";
+# TODO
+# - uncomment deck cards
+# - remove var_dumps
+
+#require "index-view.php";
 
 # Create array for the deck of cards.
 $deck = [
-  'red', 'red', 'red', 'red', 'red',
-  'orange', 'orange', 'orange', 'orange', 'orange',
-  'yellow', 'yellow', 'yellow', 'yellow', 'yellow',
-  'green', 'green', 'green', 'green', 'green',
-  'blue', 'blue', 'blue', 'blue', 'blue',
-  'indigo', 'indigo', 'indigo', 'indigo', 'indigo',
-  'violet', 'violet', 'violet', 'violet', 'violet'
+  'red', #'red', 'red', 'red', 'red',
+  'orange', #'orange', 'orange', 'orange', 'orange',
+  'yellow', #'yellow', 'yellow', 'yellow', 'yellow',
+  'green', #'green', 'green', 'green', 'green',
+  'blue', #'blue', 'blue', 'blue', 'blue',
+  'indigo', #'indigo', 'indigo', 'indigo', 'indigo',
+  'violet', #'violet', 'violet', 'violet', 'violet'
 ];
 // var_dump($deck[7]);
 
 # Create a win-condition array of ROYGBIV
 $rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
-// var_dump($rainbow);
+
+# Initialize an array for the player's hand
+$Player1Hand = [];
 
 # Create a $progress variable to keep track of where in this array we're matching to; start at 0.
 $progress = 0;
 
 # Shuffle deck
-shuffle($deck);
-// var_dump($deck);
-
-# Draw top card and look for match to 0, when that is met, +1 to $progress
-# REMEMBER TO DO 'WHILE DECK IS LARGER THAN 0 SO WE DON'T RETURN A NULL VALUE.
+// shuffle($deck);
+var_dump($deck);
 
 # While loop
-var_dump($progress);
+echo("deck count = " . count($deck));
 
-# Draw card
-$draw = array_shift($deck);
-var_dump($draw);
+while (count($deck) > 0) {
+    if ($progress > 7) {
+        echo("You win!");
+        return 1;
+    } else {
+        # Draw card
+        $draw = array_shift($deck);
+        #echo("draw = " . $draw);
+        #echo("deck count = " . count($deck));
+        #var_dump($rainbow[$progress]);
 
-var_dump($rainbow[$progress]);
+        # Check if card drawn matches the card we're looking for.
+        if ($draw == $rainbow[$progress]) {
+            echo("Your card is " . $draw . " and you were looking for " . $rainbow[$progress] . ".");
+            $progress++;
+            var_dump($progress);
+        } else {
+            echo("No match. Your card is " . $draw . " and you were looking for " . $rainbow[$progress] . ".");
+            var_dump($progress);
+        };
+    };
+};
 
-# Check if card drawn matches the card we're looking for.
-if ($draw == $rainbow[$progress]) {
-    echo("let's go!");
-    $progress++;
-    var_dump($progress);
-} else {
-    echo("no match");
-}
+
+
+echo("Deck is empty.");
+
+
+
+
+
 
 
 # Return card to end of deck
