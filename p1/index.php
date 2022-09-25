@@ -26,10 +26,31 @@ shuffle($deck);
 // var_dump($deck);
 
 # Draw top card and look for match to 0, when that is met, +1 to $progress
-
+# REMEMBER TO DO 'WHILE DECK IS LARGER THAN 0 SO WE DON'T RETURN A NULL VALUE.
 
 
 var_dump($progress);
+
+# Draw card
+$draw = array_shift($deck);
+var_dump($draw);
+
+var_dump($rainbow[$progress]);
+
+# Check if card drawn matches the card we're looking for.
+if ($draw == $rainbow[$progress]) {
+    echo("let's go!");
+    $progress++;
+    var_dump($progress);
+} else {
+    echo("no match");
+}
+
+
+# Return card to end of deck
+// var_dump($deck);
+// array_push($deck, $draw);
+// var_dump($deck);
 
 # Create a counter for the number of draws it takes.
 
