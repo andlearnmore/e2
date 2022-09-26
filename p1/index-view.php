@@ -34,7 +34,7 @@
 
     <h2>Results</h2>
     <ul>
-      <li>...</li>
+      <li><?php echo($outcome); ?></li>
     </ul>
 </body>
 </html>
