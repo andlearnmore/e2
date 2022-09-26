@@ -14,16 +14,9 @@ $deck = [
   'green', 'green', 'green', 'green', 'green',
   'blue', 'blue', 'blue', 'blue', 'blue',
   'indigo', 'indigo', 'indigo', 'indigo', 'indigo',
-  'violet', 'violet', 'violet', 'violet', 'violet'
-//   'red',
-//   'orange',
-//   'yellow',
-//   'green',
-//   'blue',
-//   'indigo',
-//   'violet',
+  'violet', 'violet', 'violet', 'violet', 'violet',
+//   'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet',
 ];
-// var_dump($deck[7]);
 
 # Create a win-condition array of ROYGBIV
 $rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
@@ -38,18 +31,18 @@ $progress = 0;
 shuffle($deck);
 
 # Play until the deck is empty, unless the player wins, whichever happens first.
-// Can't use "while (count($deck)) >= 0" because then game goes on forever.
-// If I use "while (count($deck)) > 0" then if the player hasn't won, it tries to draw from an empty deck.
 
-
-while (count($deck) > 0) {
+// while (count($deck) > 0) {
+foreach ($deck as $card) {
     # Draw card
     echo("deck count = " . count($deck));
     $draw = array_shift($deck);
 
     # Check if card drawn matches the card we're looking for.
-    # If it matches, let them know, add one to $progress to advance to next color needed,
-    # add the card to the player's hand.
+    # If it matches, let them know,
+    # add the card to the player's hand, and
+    # check if the game has been won (if player's hand matches the win-condition $rainbow array) and if so, exit loop.
+    # If game hasn't been won, add one to $progress to advance to next color needed.
     if ($draw == $rainbow[$progress]) {
         echo("Your card is " . $draw . " and you were looking for " . $rainbow[$progress] . ".");
         array_push($player1Hand, $draw);
@@ -57,16 +50,12 @@ while (count($deck) > 0) {
         # var_dump($progress);
         if ($player1Hand == $rainbow) { # If the player wins, let them know and end game.
             echo("You win!");
-            var_dump($deck);
+            var_dump($deck); # See what cards remain. Unnecessary for game, but interesting for testing.
             return 1;
         };
         $progress++;
-    } else {
-        # If drawn card doesn't match, don't advance $progress, but deck will decrease by 1.
+    } else { # If drawn card doesn't match, don't advance $progress, but deck will decrease by 1.
         echo("No match. Your card is " . $draw . " and you were looking for " . $rainbow[$progress] . ".");
-        if (count($deck) == 0) {
-            echo("Empty deck.");
-        };
     };
 };
 
