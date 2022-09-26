@@ -145,7 +145,7 @@ foreach ($phrases as $key => $value) {
     $phrases[$key] = strtoupper($value);
 }
 
-var_dump($phrases);
+// var_dump($phrases);
 
 
 # AFTER
@@ -183,4 +183,32 @@ if ($age > 75) {
     $privileges[] = 'retire';
 }
 
-var_dump($privileges);
+// var_dump($privileges);
+
+# HW practice to deal cards
+
+$cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+#shuffle($cards);
+
+# Initialize empty arrays for playerCards and computerCards.
+$playerCards = [];
+$computerCards = [];
+
+
+# Deal cards in an alternating fashion with a while-loop
+// while (count($cards) > 0) {
+//     array_push($playerCards, array_shift($cards));
+//     array_push($computerCards, array_shift($cards));
+// };
+
+# Deal cards in an alternating fashion with a foreach-loop
+foreach ($cards as $card) {
+    if ($card > count($cards)/2) {
+        array_push($playerCards, array_shift($cards));
+        array_push($computerCards, array_shift($cards));
+    };
+};
+
+# Verify results
+var_dump($playerCards); # Should yield 5 random cards when shuffled; odd numbers when not.
+var_dump($computerCards); # Should yield 5 different random cards when shuffled; even when not.
