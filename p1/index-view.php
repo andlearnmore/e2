@@ -32,10 +32,18 @@
       </ul>
 
     <h2>Results</h2>
+
+    <?php foreach ($results as $result) { ?>
     <ul>
-      <li><?php echo("Your final hand is: " .implode(', ', $player1Hand) . "."); ?></li>
-      <li><?php echo($outcome); ?></li>
-      <li>Cards drawn: <?php echo($cardsDrawn); ?></li>
+      <li>Your final hand is: <?php echo $result['finalHand'] ?>.
+      </li>
+      <li><?php echo $result['outcome'] ?>
+      </li>
+      <li>Cards drawn: <?php echo$result['cardsDrawn'] ?>
+      </li>
     </ul>
+    <?php } ?>
+
+
 </body>
 </html>

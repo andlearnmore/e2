@@ -16,14 +16,14 @@
 + Shuffle the deck
 + Play until the deck is empty, or the player gets the final card of the rainbow, whichever comes first.
 + Player draws a card. If it matches the sought card, add it to the player's hand & check for win.
-+ If the card completes the rainbow (win), break out of loop.
-+ Otherwise, advance progress counter and continue through loop.
++ If the card completes the rainbow (win), break out of loop. Otherwise, advance progress counter and continue through loop.
 + In the view, report the results.
 
 
 
 ## Outside resources
 + https://www.php.net/manual/en/function.implode.php - How to join array elements as a string.
++ https://www.php.net/manual/en/function.array-sum.php - How to find sum of elements in an array.
 + https://badih76.medium.com/use-emoji-in-html-php-javascript-and-css-12ba04112f4b - Insert emoji unicode in php.
 
 ## Notes for instructor
