@@ -10,15 +10,14 @@
 
     <h2>Mechanics</h2>
       <ul>
-        <li>In this game, players try to build a rainbow out of a deck of rainbow cards.</li>
+        <li>In this solo game, the player tries to build a rainbow out of a deck of rainbow cards before the cards run out.</li>
       </ul>
     <h3>Solo game</h3>
       <ul>
-        <li>For my first pass, I'm going to do a solo game.</li>
         <li>The cards are shuffled and the player is dealt cards one by one.</li>
-        <li>If a card is red, the player keeps it and starts to look for an orange card (and on through the rainbow).</li>
-        <li>If the card is not red, the player discards it and draws the next card.</li>
-        <li>In the solo game, I'm testing if the player can lose by not building a rainbow before getting through the deck.</li>
+        <li>If a card is red, the player keeps it and draws a new card to look for an orange card (and on through the rainbow).</li>
+        <li>If the card is not of the color sought, the player discards it and draws the next card.</li>
+
         <li>I'm going to have a counter for how many draws it took to win.</li>
         <li>I'd also like to do a test with 100 plays and see the average number of draws it takes.</li>
       </ul>
@@ -34,7 +33,9 @@
 
     <h2>Results</h2>
     <ul>
+      <li><?php echo("Your final hand is: " .implode(', ', $player1Hand) . "."); ?></li>
       <li><?php echo($outcome); ?></li>
+      <li>Cards drawn: <?php echo($cardsDrawn); ?></li>
     </ul>
 </body>
 </html>
