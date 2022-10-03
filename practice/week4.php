@@ -200,14 +200,16 @@ $computerCards = [];
 //     array_push($playerCards, array_shift($cards));
 //     array_push($computerCards, array_shift($cards));
 // };
+// Above not good because what if odd number of cards??
 
 # Deal cards in an alternating fashion with a foreach-loop
-foreach ($cards as $card) {
-    if ($card > count($cards)/2) {
-        array_push($playerCards, array_shift($cards));
-        array_push($computerCards, array_shift($cards));
-    };
-};
+foreach ($cards as key => $card) {
+  if ($key % 2 == 0) {
+      array_push($playerCards, array_shift($cards));
+  } else {
+          array_push($computerCards, array_shift($cards));
+      };
+  };
 
 # Verify results
 var_dump($playerCards); # Should yield 5 random cards when shuffled; odd numbers when not.
