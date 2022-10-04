@@ -12,10 +12,11 @@
     <h2>Mechanics</h2>
       <ul>
         <li>In this solo game, a player tries to build a rainbow out of a deck of colorful cards before the deck runs out.</li>
-        <li>The cards are shuffled and the player draws cards one by one.</li>
+        <li>Cards must be drawn in order of the rainbow to count: first a red card, then an orange card, and so on through ROYGBIV.</li>
+        <li>To begin the game, the cards are shuffled and the player draws a card.</li>
         <li>If the card drawn is red, the player keeps it and draws a new card--this time looking for an orange card (and on through the rainbow).</li>
         <li>If the card is not of the color sought, the player discards it and draws the next card.</li>
-        <li>Play continues until the player builds a hand of rainbow cards (one each in ROYGBIV order) or runs out of cards in the deck.</li>
+        <li>Play continues until the player builds a hand of rainbow cards (ROYGBIV) or runs out of cards in the deck.</li>
       </ul>
 
     <h2>Results</h2>

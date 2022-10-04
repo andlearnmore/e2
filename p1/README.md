@@ -4,8 +4,9 @@
 + URL: <http://e2p1.andlearn.me>
 
 ## Game planning
-+ Create an array of colorful cards (5 each of ROYGBIV).
+
 + Create a win-condition array of ROYGBIV for progress checking and win condition
++ Use that array to create a "deck" of colorful cards (5 each of ROYGBIV).
 + Create variables to use as part of game
 
 + Set a loop to play the game multiple times
@@ -23,10 +24,12 @@
             + Otherwise, advance progress counter and continue through loop.
     + If the card does not match the sought card, "discard" it and draw another card.
 
-+ In the view, report the results, including: 
++ In the view, report the stats, including: 
     + Number of rounds played
     + Average number of wins
     + The lowest number of cards it took to get a win
+
++ In the view, report the results of each round.
 
 ## Outside resources
 + https://www.php.net/manual/en/function.implode.php - Join array elements as a string.

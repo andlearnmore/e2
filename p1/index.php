@@ -20,7 +20,7 @@ $wins = 0;
 
 // Play the game $plays number of times
 for ($i = 0; $i < $plays; $i++) {
-    // Set $deck to $startingDeck; taking this approach in case I want to modify the game later and have deck used be some subset of $startingDeck
+    // (Re)set $deck to $startingDeck
     $deck = $startingDeck;
     $deckSize = count($deck);
     $progress = 0;
@@ -46,8 +46,8 @@ for ($i = 0; $i < $plays; $i++) {
         };
     };
 
-    // Determine outcome
-    if ($player1Hand == $rainbow) { # Win
+    // Determine outcome; if win, increase $wins counter
+    if ($player1Hand == $rainbow) {
         $outcome = 'win';
         $wins++;
     } else {
@@ -56,7 +56,7 @@ for ($i = 0; $i < $plays; $i++) {
 
     // Calculate the number of cards drawn and add that to the $rounds array
     $cardsDrawn = $deckSize - count($deck);
-    $rounds[] = $cardsDrawn;
+    $rounds [] = $cardsDrawn;
 
     // Create a string out of the $player1Hand array
     $finalHand = implode(', ', $player1Hand);
