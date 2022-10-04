@@ -32,7 +32,9 @@
 + https://www.php.net/manual/en/function.implode.php - Join array elements as a string.
 + https://www.php.net/manual/en/function.array-sum.php - Find sum of elements in an array.
 + https://www.php.net/manual/en/function.min.php - Find lowest value in an array.
-+ https://badih76.medium.com/use-emoji-in-html-php-javascript-and-css-12ba04112f4b - Insert emoji unicode in php.
++ https://www.php.net/manual/en/function.array-merge.php - Merge arrays.
++ https://www.w3schools.com/html/html_emojis.asp - Insert emoji UTF-8 in html.
++ Took advantage of Jenni's office hours 10/3/22. She helped me think about making starting deck array more DRY, and improving my separation of concerns in my outcome.
 
 ## Notes for instructor
-+ Question: I originally initialized $cardsDrawn, $draw, and $outcome outside the main for-loop (so as  global variables?) setting them to null. I then removed them for my final submission since they're only used within the for-loop and are reset in the loop based on outcomes in the current round played. Should I have initialized them first or let them appear within the for-loop? What is best practice for this?
++ Question: I originally initialized $cardsDrawn, $draw, and $outcome outside the main for-loop (so as global variables?) setting them to null. I then removed them for my final submission since they're only used within the for-loop and are reset in the loop based on outcomes in the current round played. Should I have initialized them first or let them appear within the for-loop? What is best practice for this?

@@ -1,18 +1,15 @@
 <?php
 
-// Initialize starting deck outside of for-loop for easy modification
-$startingDeck = [
-    'red', 'red', 'red', 'red', 'red',
-    'orange', 'orange', 'orange', 'orange', 'orange',
-    'yellow', 'yellow', 'yellow', 'yellow', 'yellow',
-    'green', 'green', 'green', 'green', 'green',
-    'blue', 'blue', 'blue', 'blue', 'blue',
-    'indigo', 'indigo', 'indigo', 'indigo', 'indigo',
-    'violet', 'violet', 'violet', 'violet', 'violet',
-    ];
-
-// Create an array of ROYGBIV for progress monitoring and win condition
+// Create an array of ROYGBIV for foundation of a deck, progress monitoring, and win condition
 $rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+
+// Initialize empty array for starting deck
+$startingDeck = [];
+
+// Create starting deck of 35 cards out of $rainbow array
+for ($i = 0; $i < 5; $i++) {
+    $startingDeck = array_merge($startingDeck, $rainbow);
+};
 
 // Create an empty array to use to calculate shortest time to win
 $rounds = [];
@@ -51,10 +48,10 @@ for ($i = 0; $i < $plays; $i++) {
 
     // Determine outcome
     if ($player1Hand == $rainbow) { # Win
-        $outcome = "Congratulations, you win! You found a rainbow \u{1F308}.";
+        $outcome = 'win';
         $wins++;
-    } else { # Lose
-        $outcome = "Sorry, the deck is empty and you did not find a rainbow. Better luck next time \u{1F340}.";
+    } else {
+        $outcome = 'lose';
     };
 
     // Calculate the number of cards drawn and add that to the $rounds array
