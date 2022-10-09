@@ -44,26 +44,35 @@ $currentPlayerName = $computerName;
 for ($i = 0; $i < 5; $i++) {
     # Sort hand
     sort($currentPlayer);
+    echo("Current Player: ");
     var_dump($currentPlayerName);
+    echo("Current Player hand: ");
     var_dump($currentPlayer);
     $key = array_search(14, $currentPlayer); # Looks for a knight in hand, if so, returns key value; else returns false
+    echo("Key: ");
     var_dump($key);
     if ($key === false) { # if false
         echo("No knight \n");
         $key = array_search(13, $currentPlayer);
+        echo("Key is now: ");
         var_dump($key);
         if ($key === false) {
             echo("No potion \n");
-            # FIGURE OUT HERE HOW TO PLAY A CARD THAT'S NOT A DRAGON OR WAND --> INT ONLY
+            # Play a number card.
             $key = 0;
             if ($currentPlayer[$key] < 11) {
-                $discard = array_splice($currentPlayer, $key, 1); # Discard. I think I'll make "discard" into a function when I learn how to build my own functions.
-                $lastDiscard = count($discard) - 1;
-                echo($currentPlayerName ." played a " . $discard[$lastDiscard] . "\n"); # Evtl move to index-view
+                $play = array_splice($currentPlayer, $key, 1);
+                $discard[] = $play;
+                echo($currentPlayerName ." played a " . $play[0] . "\n"); # Evtl move to index-view
                 echo("After playing a card the discard pile is:");
-                $currentPlayer [] = array_pop($deck); # Draw a card. I think I'll make "draw" into a function when I learn how to build my own functions.
                 var_dump($discard);
+                echo("After playing a card, currentPlayer hand is: ");
                 var_dump($currentPlayer);
+                $currentPlayer [] = array_pop($deck); # Draw a card. I think I'll make "draw" into a function when I learn how to build my own functions.
+                echo("CurrentPlayer hand is: ");
+                var_dump($currentPlayer);
+                $deckSize = count($deck);
+                echo("There are " . $deckSize . " cards in the deck. \n");
                 if ($currentPlayer == $computer) { # Switch players
                     $currentPlayer == $player1;
                     $currentPlayerName = $player1Name;
@@ -75,14 +84,17 @@ for ($i = 0; $i < 5; $i++) {
             };
         } else {
             echo($currentPlayerName ." played a potion. \n"); # Evtl move to index-view
-            $discard = array_splice($currentPlayer, $key, 1);
+            $play = array_splice($currentPlayer, $key, 1);
+            $discard[] = $play;
             echo("After playing a potion the discard pile is:");
             var_dump($discard);
-            var_dump($currentPlayer);
+            // echo("CurrentPlayer hand is: ");
+            // var_dump($currentPlayer);
             $currentPlayer [] = array_pop($deck); # Draw a card
-            var_dump($currentPlayer);
+            // echo("After drawing, current player hand is: ");
+            // var_dump($currentPlayer);
             $deckSize = count($deck);
-            var_dump($deckSize);
+            echo("There are " . $deckSize . " cards in the deck. \n");
             if ($currentPlayer == $computer) { # Switch players
                 $currentPlayer == $player1;
                 $currentPlayerName = $player1Name;
@@ -92,14 +104,17 @@ for ($i = 0; $i < 5; $i++) {
         };
     } else { # if true
         echo($currentPlayerName . " played a knight. \n"); # Evtl move to index-view
-        $discard = array_splice($currentPlayer, $key, 1);
+        $play = array_splice($currentPlayer, $key, 1);
+        $discard[] = $play;
         echo("After playing a knight the discard pile is:");
         var_dump($discard);
-        var_dump($currentPlayer);
+        // echo("CurrentPlayer hand is: ");
+        // var_dump($currentPlayer);
         $currentPlayer [] = array_pop($deck);
-        var_dump($currentPlayer);
+        // echo("After drawing, current player hand is: ");
+        // var_dump($currentPlayer);
         $deckSize = count($deck);
-        var_dump($deckSize);
+        echo("There are " . $deckSize . " cards in the deck. \n");
         if ($currentPlayer == $computer) { # Switch players
             $currentPlayer == $player1;
             $currentPlayerName = $player1Name;
