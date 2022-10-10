@@ -24,36 +24,38 @@ for ($i = 0; $i < 3; $i++) {
 shuffle($deck);
 
 # Give 5 cards to each of 2 players
-$player1 = array_splice($deck, 0, 5);
-$computer = array_splice($deck, 0, 5);
+$player1 [] = [
+    'name' => 'Human',
+    'hand' => array_splice($deck, 0, 5),
+    'queens' => []
+];
 
-$player1Name = 'Human';
-$computerName = 'Computer';
+$computer [] = [
+    'name' => 'Computer',
+    'hand' => array_splice($deck, 0, 5),
+    'queens' => []
+];
 
-$playerQueens = [];
-$computerQueens = [];
+$players = array_merge($player1, $computer);
 
 $deckSize = count($deck);
 
 # Computer goes first
-$currentPlayer = $computer;
-$currentPlayerName = $computerName;
-// if count($playerQueens) > 0 {
+$currentPlayer = $players[1];
+var_dump($currentPlayer);
+// $currentPlayerName = $computerName;
+// // if count($playerQueens) > 0 {
 
 # Play 5 rounds. FOR TESTING ONLY.
 for ($i = 0; $i < 5; $i++) {
     # Sort hand
-    sort($currentPlayer);
+    sort($currentPlayer['hand']);
     echo("Current Player: ");
-    var_dump($currentPlayerName);
-    echo("Current Player hand: ");
     var_dump($currentPlayer);
-    $key = array_search(14, $currentPlayer); # Looks for a knight in hand, if so, returns key value; else returns false
-    echo("Key: ");
-    var_dump($key);
+    $key = array_search(14, $currentPlayer['hand']); # Looks for a knight in hand, if so, returns key value; else returns false
     if ($key === false) { # if false
         echo("No knight \n");
-        $key = array_search(13, $currentPlayer);
+        $key = array_search(13, $currentPlayer['hand']);
         echo("Key is now: ");
         var_dump($key);
         if ($key === false) {
@@ -61,65 +63,63 @@ for ($i = 0; $i < 5; $i++) {
             # Play a number card.
             $key = 0;
             if ($currentPlayer[$key] < 11) {
-                $play = array_splice($currentPlayer, $key, 1);
+                $play = array_splice($currentPlayer['hand'], $key, 1);
                 $discard[] = $play;
-                echo($currentPlayerName ." played a " . $play[0] . "\n"); # Evtl move to index-view
+                echo($currentPlayer['name'] ." played a " . $play[0] . "\n"); # Evtl move to index-view
                 echo("After playing a card the discard pile is:");
                 var_dump($discard);
                 echo("After playing a card, currentPlayer hand is: ");
-                var_dump($currentPlayer);
-                $currentPlayer [] = array_pop($deck); # Draw a card. I think I'll make "draw" into a function when I learn how to build my own functions.
+                var_dump($currentPlayer['hand']);
+                $currentPlayer['hand'] [] = array_pop($deck); # Draw a card. I think I'll make "draw" into a function when I learn how to build my own functions.
                 echo("CurrentPlayer hand is: ");
-                var_dump($currentPlayer);
+                var_dump($currentPlayer['hand']);
                 $deckSize = count($deck);
                 echo("There are " . $deckSize . " cards in the deck. \n");
-                if ($currentPlayer == $computer) { # Switch players
-                    $currentPlayer == $player1;
-                    $currentPlayerName = $player1Name;
+                if ($currentPlayer == $players[1]) { # Switch players
+                    $currentPlayer = $players[0];
                 } else {
-                    $currentPlayer == $computer;
+                    $currentPlayer = $players[1];
                 };
             } else {
                 echo("Skip turn.");
+                if ($currentPlayer == $players[1]) { # Switch players
+                    $currentPlayer = $players[0];
+                } else {
+                    $currentPlayer = $players[1];
+                };
             };
         } else {
-            echo($currentPlayerName ." played a potion. \n"); # Evtl move to index-view
-            $play = array_splice($currentPlayer, $key, 1);
+            echo($currentPlayer['name'] ." played a potion. \n"); # Evtl move to index-view
+            $play = array_splice($currentPlayer['hand'], $key, 1);
             $discard[] = $play;
             echo("After playing a potion the discard pile is:");
             var_dump($discard);
-            // echo("CurrentPlayer hand is: ");
-            // var_dump($currentPlayer);
-            $currentPlayer [] = array_pop($deck); # Draw a card
-            // echo("After drawing, current player hand is: ");
-            // var_dump($currentPlayer);
+            $currentPlayer['hand'] [] = array_pop($deck); # Draw a card
             $deckSize = count($deck);
             echo("There are " . $deckSize . " cards in the deck. \n");
-            if ($currentPlayer == $computer) { # Switch players
-                $currentPlayer == $player1;
-                $currentPlayerName = $player1Name;
+            if ($currentPlayer == $players[1]) { # Switch players
+                $currentPlayer = $players[0];
             } else {
-                $currentPlayer == $computer;
+                $currentPlayer = $players[1];
             };
         };
     } else { # if true
-        echo($currentPlayerName . " played a knight. \n"); # Evtl move to index-view
-        $play = array_splice($currentPlayer, $key, 1);
+        echo($currentPlayer['name'] . " played a knight. \n"); # Evtl move to index-view
+        $play = array_splice($currentPlayer['hand'], $key, 1);
         $discard[] = $play;
         echo("After playing a knight the discard pile is:");
         var_dump($discard);
         // echo("CurrentPlayer hand is: ");
         // var_dump($currentPlayer);
-        $currentPlayer [] = array_pop($deck);
+        $currentPlayer['hand'] = array_pop($deck);
         // echo("After drawing, current player hand is: ");
         // var_dump($currentPlayer);
         $deckSize = count($deck);
         echo("There are " . $deckSize . " cards in the deck. \n");
-        if ($currentPlayer == $computer) { # Switch players
-            $currentPlayer == $player1;
-            $currentPlayerName = $player1Name;
+        if ($currentPlayer == $players[1]) { # Switch players
+            $currentPlayer = $players[0];
         } else {
-            $currentPlayer == $computer;
+            $currentPlayer = $players[1];
         };
     };
 };
