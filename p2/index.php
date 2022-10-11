@@ -8,122 +8,130 @@
 $numberCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 $attackCards = [14, 13];
 $defendCards = [12, 11];
+# TODO: Add in king cards here, and logic below.
 
 $deck = [];
 $discard = [];
 
+# Combine arrays to create deck
 for ($i = 0; $i < 4; $i++) {
     $deck = array_merge($deck, $numberCards, $attackCards);
 };
-
 for ($i = 0; $i < 3; $i++) {
     $deck = array_merge($deck, $defendCards);
 };
 
-// # Shuffle deck
+# Shuffle deck
 shuffle($deck);
 
-# Give 5 cards to each of 2 players
+# Set up two player game
 $player1 [] = [
     'name' => 'Human',
     'hand' => array_splice($deck, 0, 5),
     'queens' => []
 ];
-
 $computer [] = [
     'name' => 'Computer',
     'hand' => array_splice($deck, 0, 5),
     'queens' => []
 ];
-
 $players = array_merge($player1, $computer);
 
-$deckSize = count($deck);
+# Create empty array of turns to keep track of turns -- FOR TESTING
+$turns = [];
 
 # Computer goes first
-$currentPlayer = $players[1];
-var_dump($currentPlayer);
-// $currentPlayerName = $computerName;
+$currentPlayer = $players[0];
+
 // // if count($playerQueens) > 0 {
 
-# Play 5 rounds. FOR TESTING ONLY.
-for ($i = 0; $i < 5; $i++) {
-    # Sort hand
+# Play 10 rounds. FOR TESTING ONLY.
+for ($i = 0; $i < 10; $i++) {
+    # Display hand for testing
     sort($currentPlayer['hand']);
     echo("Current Player: ");
-    var_dump($currentPlayer);
-    $key = array_search(14, $currentPlayer['hand']); # Looks for a knight in hand, if so, returns key value; else returns false
+    $turnStartHand = implode(', ', $currentPlayer['hand']);
+    echo ($turnStartHand . "\n");
+
+
+    # Looks for a knight (14) in hand, if so, returns key value; else returns false
+    $key = array_search(14, $currentPlayer['hand']);
     if ($key === false) { # if false
         echo("No knight \n");
+
+        # If no knight, look for a potion (13); returns key value or false.
         $key = array_search(13, $currentPlayer['hand']);
-        echo("Key is now: ");
-        var_dump($key);
         if ($key === false) {
             echo("No potion \n");
-            # Play a number card.
-            $key = 0;
-            if ($currentPlayer[$key] < 11) {
-                $play = array_splice($currentPlayer['hand'], $key, 1);
-                $discard[] = $play;
-                echo($currentPlayer['name'] ." played a " . $play[0] . "\n"); # Evtl move to index-view
-                echo("After playing a card the discard pile is:");
-                var_dump($discard);
-                echo("After playing a card, currentPlayer hand is: ");
-                var_dump($currentPlayer['hand']);
-                $currentPlayer['hand'] [] = array_pop($deck); # Draw a card. I think I'll make "draw" into a function when I learn how to build my own functions.
-                echo("CurrentPlayer hand is: ");
-                var_dump($currentPlayer['hand']);
-                $deckSize = count($deck);
-                echo("There are " . $deckSize . " cards in the deck. \n");
-                if ($currentPlayer == $players[1]) { # Switch players
-                    $currentPlayer = $players[0];
-                } else {
-                    $currentPlayer = $players[1];
-                };
-            } else {
-                echo("Skip turn.");
-                if ($currentPlayer == $players[1]) { # Switch players
-                    $currentPlayer = $players[0];
-                } else {
-                    $currentPlayer = $players[1];
-                };
+
+            # If no potion, look for a number card, starting with lowest; 11+ are attack or defense cards
+            if ($currentPlayer['hand'][0] < 13) {
+                
+                # If there's a number card, play it.
+                $play = array_shift($currentPlayer['hand']);
             };
         } else {
-            echo($currentPlayer['name'] ." played a potion. \n"); # Evtl move to index-view
-            $play = array_splice($currentPlayer['hand'], $key, 1);
-            $discard[] = $play;
-            echo("After playing a potion the discard pile is:");
-            var_dump($discard);
-            $currentPlayer['hand'] [] = array_pop($deck); # Draw a card
-            $deckSize = count($deck);
-            echo("There are " . $deckSize . " cards in the deck. \n");
-            if ($currentPlayer == $players[1]) { # Switch players
-                $currentPlayer = $players[0];
-            } else {
-                $currentPlayer = $players[1];
-            };
+
+            # There's a potion; play it.
+            $play = array_pop($currentPlayer['hand']);
         };
-    } else { # if true
-        echo($currentPlayer['name'] . " played a knight. \n"); # Evtl move to index-view
-        $play = array_splice($currentPlayer['hand'], $key, 1);
-        $discard[] = $play;
-        echo("After playing a knight the discard pile is:");
-        var_dump($discard);
-        // echo("CurrentPlayer hand is: ");
-        // var_dump($currentPlayer);
-        $currentPlayer['hand'] = array_pop($deck);
-        // echo("After drawing, current player hand is: ");
-        // var_dump($currentPlayer);
-        $deckSize = count($deck);
-        echo("There are " . $deckSize . " cards in the deck. \n");
-        if ($currentPlayer == $players[1]) { # Switch players
-            $currentPlayer = $players[0];
-        } else {
-            $currentPlayer = $players[1];
-        };
+    } else { 
+
+        # There's a knight; play it.
+        $play = array_pop($currentPlayer['hand']);
+    };
+
+    $discard[] = $play;
+
+    # FOR TESTING: Say what player played and what the discard pile has in it.
+    echo($currentPlayer['name'] ." played a " . $play . ". \n"); # Evtl move to index-view
+    $discardPile = implode(', ', $discard);
+    echo("Discard pile is: " . $discardPile . ".\n");
+
+    # Draw a card.
+    $draw = array_pop($deck); 
+    $currentPlayer['hand'][] = $draw;
+    # Sort hand
+    sort($currentPlayer['hand']);
+
+    # Turn 'hand' array into a string for recording turn.
+    $currentHand = implode(', ', $currentPlayer['hand']);
+    echo($currentHand . "\n");
+
+    # Count remaining cards in deck
+    $deckSize = count($deck);
+
+    # Add on to a $results array to display outcomes of each round in the view
+    $queens = implode(', ', $currentPlayer['queens']);
+
+    # Output card name
+    if ($play == 14) {
+        $playedCard = 'knight';
+    } elseif ($play == 13) {
+        $playedCard = 'potion';
+    } elseif ($play == 12) {
+        $playedCard = 'dragon';
+    } elseif ($play == 11) {
+        $playedCard = 'wand';
+    } else {
+        $playedCard = $play;
+    };
+
+    $turns [] = [
+        'player' => $currentPlayer['name'],
+        'playedCard' => $playedCard,
+        'draw' => $draw,
+        'hand' => $currentHand,
+        'queens' => $queens,
+        'deckSize' => $deckSize
+    ];
+       
+    # Switch players
+    if ($currentPlayer['name'] == 'Human') { 
+        $currentPlayer = $players[1];
+    } else {
+        $currentPlayer = $players[0];
     };
 };
 // };
-
-
-// require 'index-view.php';
+require 'index-view.php';
