@@ -4,9 +4,8 @@
 <head>
     <title>Sleeping Queens</title>
     <meta charset='utf-8'>
-    <style>
-        /* Input style here */
-    </style>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -21,26 +20,41 @@
         <h2>Results</h2>
 
 
-        <h3>Turns</h3>
-        <?php foreach ($turns as $key => $turn) { ?>
-        <h4>Turn <?php echo($key + 1) ?>
-        </h4>
-        <ul>
-            <li>Player: <?php echo $turn['player'] ?>
-            </li>
-            <li>Card played: <?php echo $turn['playedCard'] ?>
-            </li>
-            <li>Draw: <?php echo $turn['draw'] ?>
-            </li>
-            <li>Hand: <?php echo $turn['hand'] ?>
-            </li>
-            <li>Queens: <?php echo $turn['queens']?>
-            </li>
-            <li>Cards left in deck: <?php echo $turn['deckSize'] ?>
-            </li>
 
-        </ul>
-        <?php } ?>
+        <h3>Turns</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Turn</th>
+                    <th>Starting Hand</th>
+                    <th>Player</th>
+                    <th>Card Played</th>
+                    <th>Draw</th>
+                    <th>Hand</th>
+                    <th>Queens</th>
+                    <th>Discard Pile</th>
+                    <th>Cards Remaining in Deck</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($turns as $key => $turn) { ?>
+                    <tr>
+                        <td><?php echo($key + 1) ?></td>
+                        <td><?php echo $turn['turnStartHand'] ?></td>
+                        <td><?php echo $turn['player'] ?></td>
+                        <td><?php echo $turn['playedCard'] ?></td>
+                        <td><?php echo $turn['draw'] ?></td>
+                        <td><?php echo $turn['hand'] ?></td>
+                        <td><?php echo $turn['queens']?></td>
+                        <td><?php echo $turn['discard']?></td>
+                        <td><?php echo $turn['deckSize'] ?></td>
+                    </tr>
+                    <?php } ?>
+
+            </tbody>
+        </table>
+
         <form method='POST' action='process.php'>
 
         </form>
