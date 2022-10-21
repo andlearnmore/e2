@@ -2,22 +2,37 @@
 
 session_start();
 
-# Collect input from form
-// $answer = $_POST['answer'];
+$playerMove = $_POST['playerMove'];
 
-$anyInput = true;
+$computerMove = ['rock', 'paper', 'scissors'][rand(0, 2)];
 
-if ($answer == '') {
-    $anyInput = false;
-} elseif ($answer == 'pumpkin') {
-    $correct = true;
-} else {
-    $correct = false;
+if ($playerMove == $computerMove) {
+    $outcome = 'tie';
+} elseif ($playerMove == 'rock') {
+    if ($computerMove == 'paper') {
+        $outcome = 'computer';
+    } else {
+        $outcome = 'player';
+    }
+} elseif ($playerMove == 'paper') {
+    if ($computerMove == 'scissors') {
+        $outcome = 'computer';
+    } else {
+        $outcome = 'player';
+    }
+} elseif ($playerMove == 'scissors') {
+    if ($computerMove == 'rock') {
+        $outcome = 'computer';
+    } else {
+        $outcome = 'player';
+    }
 }
 
+
 $_SESSION['results'] = [
-    'anyInput' => $anyInput,
-    'correct' => $correct
+    'playerMove' => $playerMove,
+    'computerMove' => $computerMove,
+    'outcome' => $outcome
 ];
 
 header('Location: index.php');

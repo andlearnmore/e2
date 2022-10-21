@@ -1,12 +1,10 @@
 
 
-# Project 2: German Vocabulary Practice
+# Project 2: Rock Paper Scissors
 + By: Anne Dwojeski-Santos
 + URL: <http://e2p2.andlearn.me>
 
-## Game Planning
-* Create an array of vocabulary words 
-    * Animals: English word, German word, gender, 
+
 
 ## Outside resources
 

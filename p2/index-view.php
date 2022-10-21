@@ -2,63 +2,46 @@
 <html lang='en'>
 
 <head>
-    <title>Sleeping Queens</title>
+    <title>Rock Paper Scissors</title>
     <meta charset='utf-8'>
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-    <h1>Project 2: Sleeping Queens</h1>
+    <h1>Project 2: Rock Paper Scissors</h1>
 
     <h2>Instructions</h2>
     <ul>
-        <li>.</li>
-
-
-        <h2>Results</h2>
-
-
-
-        <h3>Turns</h3>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Turn</th>
-                    <th>Starting Hand</th>
-                    <th>Player</th>
-                    <th>Card Played</th>
-                    <th>Draw</th>
-                    <th>Hand</th>
-                    <th>Queens</th>
-                    <th>Discard Pile</th>
-                    <th>Cards Remaining in Deck</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($turns as $key => $turn) { ?>
-                    <tr>
-                        <td><?php echo($key + 1) ?></td>
-                        <td><?php echo $turn['turnStartHand'] ?></td>
-                        <td><?php echo $turn['player'] ?></td>
-                        <td><?php echo $turn['playedCard'] ?></td>
-                        <td><?php echo $turn['draw'] ?></td>
-                        <td><?php echo $turn['hand'] ?></td>
-                        <td><?php echo $turn['queens']?></td>
-                        <td><?php echo $turn['discard']?></td>
-                        <td><?php echo $turn['deckSize'] ?></td>
-                    </tr>
-                    <?php } ?>
-
-            </tbody>
-        </table>
+        <p>This is a standard game of Rock Paper Scissors. You'll play against the computer.</p>
+        <p>Ready? Select your move:</p>
 
         <form method='POST' action='process.php'>
 
+            <input type='radio' id='rock' name='playerMove' value='rock' <?php echo (!isset($playerMove) or $playerMove == 'rock') ? 'checked' : '' ?>><label for='rock'>rock</label>
+            <input type='radio' id='paper' name='playerMove' value='paper' <?php echo (isset($playerMove) and $playerMove == 'paper') ? 'checked' : '' ?>><label for='paper'>paper</label>
+            <input type='radio' id='scissors' name='playerMove' value='scissors' <?php echo (isset($playerMove) and $playerMove == 'scissors') ? 'checked' : '' ?>><label for='scissors'>scissors</label>
+
+
+        <button type='submit'>Play</button>
         </form>
 
+    <?php if(isset($results)) { ?>
+    <h2>Results</h2>
+    
+    <ul>
+        <li>You played <?php echo $playerMove ?>.</li>
+        <li>The computer played <?php echo $computerMove ?>.</li>
+        <li><?php if ($outcome == 'tie') { ?>It was a tie. 
+            <?php } else if ($outcome == 'computer') { ?>
+                <?php echo ucfirst($computerMove) ?> beats <?php echo $playerMove ?>. You lose.
+                <?php } else { echo ucfirst($playerMove) ?> beats <?php echo $computerMove ?>. You win!
+                <?php } ?>
+
+        
+    </ul>
+
+    <?php } ?>
 
 </body>
 
