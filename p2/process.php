@@ -9,23 +9,11 @@ $computerMove = ['rock', 'paper', 'scissors'][rand(0, 2)];
 if ($playerMove == $computerMove) {
     $outcome = 'tie';
 } elseif ($playerMove == 'rock') {
-    if ($computerMove == 'paper') {
-        $outcome = 'computer';
-    } else {
-        $outcome = 'player';
-    }
+    $outcome = ($computerMove == 'paper') ? 'computer' : 'player';
 } elseif ($playerMove == 'paper') {
-    if ($computerMove == 'scissors') {
-        $outcome = 'computer';
-    } else {
-        $outcome = 'player';
-    }
+    $outcome = ($computerMove == 'scissors') ? 'computer' : 'player';
 } elseif ($playerMove == 'scissors') {
-    if ($computerMove == 'rock') {
-        $outcome = 'computer';
-    } else {
-        $outcome = 'player';
-    }
+    $outcome = ($computerMove == 'rock') ? 'computer' : 'player';
 }
 
 
