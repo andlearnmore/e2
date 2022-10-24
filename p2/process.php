@@ -8,12 +8,18 @@ $_SESSION['gameChoice'] = [
     'gameChoice' => $_POST['gameChoice']
 ];
 
-# __________ Number Game __________ #
+# __________ Coin Toss __________ #
 
-// $guess = $_POST['guess'];
+$choice = $_POST['choice'];
 
-$_SESSION['guess'] = [
-    'guess' => $_POST['guess']
+$flip = ['heads', 'tails'][rand(0,1)];
+
+$playerWins = $choice == $flip;
+
+$_SESSION['coinResults'] = [
+    'choice' => $choice,
+    'flip' => $flip,
+    'playerWins' => $playerWins
 ];
 
 # __________ Rock Paper Scissors __________ #
