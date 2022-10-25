@@ -9,16 +9,6 @@ if(isset($_SESSION['gameChoice'])){
     $_SESSION['gameChoice'] = null;
 }
 
-# __________ Coin Toss __________ #
-
-if(isset($_SESSION['coinResults'])) {
-    $coinResults = $_SESSION['coinResults'];
-    $choice = $coinResults['choice'];
-    $flip = $coinResults['flip'];
-    $playerWins = $coinResults['playerWins'];
-    $_SESSION['coinResults'] = null;
-
-}
 
 # __________ Rock Paper Scissors __________ #
 
@@ -30,5 +20,16 @@ if(isset($_SESSION['rpsResults'])) {
     $_SESSION['rpsResults'] = null;
 }
 
+
+# __________ Coin Toss __________ #
+
+if(isset($_SESSION['coinResults'])) {
+    $coinResults = $_SESSION['coinResults'];
+    $choice = $coinResults['choice'];
+    $flip = $coinResults['flip'];
+    $playerWins = $coinResults['playerWins'];
+    $_SESSION['coinResults'] = null;
+
+}
 
 require 'index-view.php';

@@ -8,20 +8,6 @@ $_SESSION['gameChoice'] = [
     'gameChoice' => $_POST['gameChoice']
 ];
 
-# __________ Coin Toss __________ #
-
-$choice = $_POST['choice'];
-
-$flip = ['heads', 'tails'][rand(0,1)];
-
-$playerWins = $choice == $flip;
-
-$_SESSION['coinResults'] = [
-    'choice' => $choice,
-    'flip' => $flip,
-    'playerWins' => $playerWins
-];
-
 # __________ Rock Paper Scissors __________ #
 
 $playerMove = $_POST['playerMove'];
@@ -42,6 +28,20 @@ $_SESSION['rpsResults'] = [
     'computerMove' => $computerMove,
     'playerMove' => $playerMove,
     'outcome' => $outcome
+];
+
+# __________ Coin Toss __________ #
+
+$choice = $_POST['choice'];
+
+$flip = ['heads', 'tails'][rand(0,1)];
+
+$playerWins = $choice == $flip;
+
+$_SESSION['coinResults'] = [
+    'choice' => $choice,
+    'flip' => $flip,
+    'playerWins' => $playerWins
 ];
 
 header('Location: index.php');
