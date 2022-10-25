@@ -16,6 +16,7 @@
             <div class='alert alert-primary' role='alert'>
                 <label for='gameChoice'>Which game would you like to play? Select from the drop-down menu.</label>
                 <br>
+                <br>
                 <div class='dropdown'>
                     <select id='gameChoice' name='gameChoice'>
                         <option value='coinToss' <?php echo (!isset($gameChoice) or $gameChoice['gameChoice'] == 'coinToss') ? 'selected' : '' ?>>Coin Toss</option>
@@ -72,7 +73,7 @@
             </div>
         </div>
 
-        <!-- # If game is rock-paper-scissors then show this part -->
+        <!-- # If game is rock-paper-scissors -->
         <?php } elseif (($gameChoice['gameChoice'] == 'rps') or ($rpsResults['playerMove'])) {?>
         <div class='alert alert-warning' role='alert'>
             <h2>Instructions: Rock Paper Scissors</h2>
