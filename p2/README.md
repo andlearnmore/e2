@@ -1,6 +1,6 @@
 
 # Project 2: Pick and Play (featuring Rock Paper Scissors)
-+ By: Anne Dwojeski-Santos
++ By: Anne Dwojeski-Santos October 2022
 + URL: <http://e2p2.andlearn.me>
 
 ## Outside resources
