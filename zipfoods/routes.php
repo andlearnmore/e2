@@ -7,5 +7,5 @@ return [
     '/' => ['AppController', 'index'],
     '/about' => ['AppController', 'about'],
     '/products' => ['ProductsController', 'index'],
-    '/product' => ['ProductsController', 'show']
+    '/product' => ['ProductsController', 'show'],
 ];

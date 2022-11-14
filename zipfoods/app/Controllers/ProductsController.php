@@ -17,7 +17,6 @@ class ProductsController extends Controller
     public function index()
     {
 
-        
         $products = $this->productsObj->getAll();
 
         return $this->app->view('products/index', ['products' => $products]);
@@ -30,7 +29,7 @@ class ProductsController extends Controller
          $product = $this->productsObj->getBySku($sku);
 
          if (is_null($product)){
-            return $this->app->view('errors/404');
+            return $this->app->view('products/missing');
          }
 
 return $this->app->view('products/show', ['product' => $product]);
