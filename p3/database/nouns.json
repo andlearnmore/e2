@@ -1,0 +1,105 @@
+{
+    "1": {
+        "id": 1,
+        "noun": "Kuchen",
+        "article": "der",
+        "plural": "Kuchen",
+        "english": "cake"
+    },
+
+    "2": {
+        "id": 2,
+        "noun": "Kerze",
+        "article": "die",
+        "plural": "Kerzen",
+        "english": "candle"
+    },
+
+    "3": {
+        "id": 3,
+        "noun": "Ballon",
+        "article": "der",
+        "plural": "Ballons",
+        "english": "balloon"
+    },
+
+    "4": {
+        "id": 4,
+        "noun": "Geschenk",
+        "article": "das",
+        "plural": "Geschenke",
+        "english": "gift"
+    },
+
+    "5": {
+        "id": 5,
+        "noun": "Geburtstag",
+        "article": "der",
+        "plural": "Geburtstage",
+        "english": "birthday"
+    },
+
+    "6": {
+        "id": 6,
+        "noun": "Tisch",
+        "article": "der",
+        "plural": "Tische",
+        "english": "table"
+    },
+
+    "7": {
+        "id": 7,
+        "noun": "Gabel",
+        "article": "die",
+        "plural": "Gabeln",
+        "english": "fork"
+    },
+
+    "8": {
+        "id": 8,
+        "noun": "Löffel",
+        "article": "der",
+        "plural": "Löffel",
+        "english": "spoon"
+    },
+
+    "9": {
+        "id": 9,
+        "noun": "Messer",
+        "article": "das",
+        "plural": "Messer",
+        "english": "knife"
+    },
+
+    "10": {
+        "id": 10,
+        "noun": "Teller",
+        "article": "der",
+        "plural": "Teller",
+        "english": "plate"
+    },
+
+    "11": {
+        "id": 11,
+        "noun": "Serviette",
+        "article": "die",
+        "plural": "Servietten",
+        "english": "napkin"
+    },
+
+    "12": {
+        "id": 12,
+        "noun": "Glas",
+        "article": "das",
+        "plural": "Gläser",
+        "english": "glass"
+    },
+
+    "13": {
+        "id": 13,
+        "noun": "Getränk",
+        "article": "das",
+        "plural": "Getränke",
+        "english": "drink"
+    }
+}
