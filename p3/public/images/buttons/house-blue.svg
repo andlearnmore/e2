@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.1 155.93">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5c72a5;
+        stroke: #2b3990;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="houses">
+    <g id="blue-house">
+      <rect id="square" class="cls-1" x="10.05" y="64.13" width="100" height="90.8"/>
+      <rect id="rectangle" class="cls-1" x="82.26" y="7.86" width="16.84" height="40"/>
+      <polygon id="triangle" class="cls-1" points="60.05 1.54 2.17 69.35 117.94 69.35 60.05 1.54"/>
+    </g>
+  </g>
+</svg>
