@@ -27,14 +27,29 @@ class Nouns
     public function getByNoun(string $noun)
     {
         $nounId = array_search($noun, array_column($this->nouns, 'noun', 'id'));
-        dump($this->getByNoun($nounId));
         return $this->getByNoun($nounId);
     }
 
-    // public function getArticle(string $nounId)
-    // {
-    //     getByNoun($nounId); # I think this returns a nounId, which I'll use next
-    //     # Take the nounId and look in the array
-    //     $nounArticle = array_search($nounId, array_column($this->nouns, 'nounId', 'article')); 
-    // }
+    public function getGameArray()
+    {
+        # Get a new 'deck' of words from the array each time by shuffling.
+        # Creating a variable so I can check if this is true/false for testing.
+        $shuffle = shuffle($this->nouns);
+
+        $length = count($this->nouns) - 1;
+        $gameLength = 10;
+
+        # I'm hardcoding $gameLength above, but if I made it dynamic, 
+        # I want to make sure it's not longer than the actual array.
+        if ($length >= $gameLength) {
+            $gameLength = $gameLength;
+        } else {
+            $gameLength = $length;
+        };
+
+        $words = array_slice($this->nouns, 0, $gameLength);
+        
+        return $words;
+    }
+
 }

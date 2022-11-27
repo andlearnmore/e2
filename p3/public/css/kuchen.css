@@ -37,6 +37,21 @@ MAIN LAYOUT
     box-sizing: border-box;
 }
 
+body {
+    /* Default font-size */
+    font-size: 1.6rem;
+}
+
+
+h2 {
+    font-size: 2.75rem;
+}
+
+header {
+    text-align: center;
+    margin-top: 20px;
+}
+
 html {
     /* http://snook.ca/archives/html_and_css/font-size-with-rem */
     font-size: 62.5%;
@@ -49,11 +64,11 @@ html {
     overflow-y: scroll;
 }
 
-body {
-    /* Default font-size */
-    font-size: 1.6rem;
+#logo {
+    width: 100px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
-
 
 main {
     max-width: 1000px;
@@ -64,19 +79,85 @@ main {
     text-align: center;
 }
 
-header {
-    text-align: center;
+.welcome {
+    font-size: 3rem;
     margin-top: 20px;
+    text-align: center;
+    
 }
 
-#logo {
-    /* Actual width is 636; displaying at half-size for retina screens */
+/*----------------------------------------------------
+PRODUCTS
+-----------------------------------------------------*/
+#product-index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+a.product-link:link,
+a.product-link:visited,
+a.product-link:active,
+a.product-link:hover {
+    text-decoration: none;
+    color: var(--black);
+    cursor: pointer;
+    border: 1px solid var(--silver);
+    text-align: center;
+    padding: 15px;
+    margin: 15px;
+    width: 30%;
+    min-width: 300px;
+}
+
+a.product-link:hover {
+    border: 1px solid var(--black);
+}
+
+.product-name {
+    height: 50px;
+    font-size: 2rem;
+    margin: 5px 0 10px 0;
+    vertical-align: baseline;
+}
+
+.product-thumb {
+    width: 75%;
+    max-width: 200px;
+    border-radius: var(--radius);
+}
+
+.product-description {
+    margin: auto;
+    margin-top: 10px;
+    text-align: left;
+    font-style: italic;
+    line-height: 1.5;
+    width: 95%;
+    max-width: 400px;
+}
+
+.product-price {
+    font-family: var(--serif-font);
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 10px;
+}
+
+#product-review {
+    margin: 20px auto;
+    max-width: 75%;
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+#product-review input {
     width: 200px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: auto;
 }
 
-h2 {
-    font-size: 2.75rem;
+#product-review textarea {
+    height: 100px;
 }
-
