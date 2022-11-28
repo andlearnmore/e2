@@ -6,6 +6,7 @@ class Nouns
 {
     # Properties
     private $nouns = [];
+    public $gameWords = [];
 
     # Methods
     public function __construct($dataSource)
@@ -30,26 +31,47 @@ class Nouns
         return $this->getByNoun($nounId);
     }
 
-    public function getGameArray()
+    public function getWord()
     {
         # Get a new 'deck' of words from the array each time by shuffling.
         # Creating a variable so I can check if this is true/false for testing.
         $shuffle = shuffle($this->nouns);
+        $int = 0;
 
-        $length = count($this->nouns) - 1;
-        $gameLength = 10;
+        $word = $this->nouns[$int];
+        // return $word;
 
-        # I'm hardcoding $gameLength above, but if I made it dynamic, 
-        # I want to make sure it's not longer than the actual array.
-        if ($length >= $gameLength) {
-            $gameLength = $gameLength;
+        # Trying to make sure that words don't repeat but $gameWords isn't updating.
+        # Need to find notes from class on thi
+        if (in_array($this->gameWords, $word) == false) {
+            $gameWords[] = array_push($word);
+            return $word;
         } else {
-            $gameLength = $length;
-        };
-
-        $words = array_slice($this->nouns, 0, $gameLength);
-        
-        return $words;
+            $int++;
+        }
+            
     }
+
+    // public function getGameArray()
+    // {
+    //     # Get a new 'deck' of words from the array each time by shuffling.
+    //     # Creating a variable so I can check if this is true/false for testing.
+    //     $shuffle = shuffle($this->nouns);
+
+    //     $length = count($this->nouns) - 1;
+    //     $gameLength = 10;
+
+    //     # I'm hardcoding $gameLength above, but if I made it dynamic, 
+    //     # I want to make sure it's not longer than the actual array.
+    //     if ($length >= $gameLength) {
+    //         $gameLength = $gameLength;
+    //     } else {
+    //         $gameLength = $length;
+    //     };
+
+    //     $words = array_slice($this->nouns, 0, $gameLength);
+        
+    //     return $words;
+    // }
 
 }
