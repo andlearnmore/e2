@@ -54,5 +54,19 @@
         </ul>
     @endif
 
+    <div id='reviews'>
+        <h3>What our customers think...</h3>
+
+        @if (!$reviews)
+            There aren't any reviews for this product yet.
+        @endif
+
+        @foreach($reviews as $review)
+            <div class='review'>
+                <div class='review-name'>{{ $review['name'] }}</div>
+                <div class='review-content'>{{ $review['review' ]}}</div>
+            </div>
+        @endforeach
+
     <a href='/products'>&larr; Return to all products</a>
 @endsection

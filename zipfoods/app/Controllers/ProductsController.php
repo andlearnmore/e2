@@ -13,12 +13,49 @@ class ProductsController extends Controller
         return $this->app->view('products/index', ['products' => $products]);
     }
 
+    public function new()
+    {
+        $productSaved = $this->app->old('productSaved');
+        $sku = $this->app->old('sku');
+
+        return $this->app->view('products/new', [
+            'productSaved' => $productSaved,
+            'sku' => $sku
+        ]);
+    }
+
+    public function saveNew() 
+    {
+        # Validate input
+        $this->app->validate([
+            'name' => 'required',
+            'sku' => 'required|alphaNumericDash',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'available' => 'required|digit',
+            'weight' => 'required|numeric',
+        ]);
+
+    
+        # Persist to products table
+        $this->app->db()->insert('products', $this->app->inputAll());
+
+        return $this->app->redirect('/products/new', [
+            'productSaved' => true,
+            'sku' => $this->app->input('sku')
+        ]); 
+    }
+
     public function show()
     {
         $sku = $this->app->param('sku');
 
+        if (is_null($sku)) {
+            $this->app->redirect('/products');
+        }
+
         $productQuery = $this->app->db()->findByColumn('products', 'sku', '=', $sku);
- 
+
         if (empty($productQuery)){
             return $this->app->view('products/missing');
         } else {
@@ -27,9 +64,12 @@ class ProductsController extends Controller
 
         $reviewSaved = $this->app->old('reviewSaved');
 
+        $reviews = $this->app->db()->findByColumn('reviews', 'product_id', '=', $product['id']);
+
         return $this->app->view('products/show', [
             'product' => $product, 
-            'reviewSaved' => $reviewSaved 
+            'reviewSaved' => $reviewSaved,
+            'reviews' => $reviews
         ]); 
     }
 

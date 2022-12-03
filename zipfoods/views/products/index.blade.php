@@ -8,6 +8,8 @@
 
     <h2>All Products</h2>
 
+    <a href='/products/new'>Add a new product</a>
+
     <div id='product-index'>
         @foreach ($products as $product)
             <a class='product-link' href="/product?sku={{ $product['sku'] }}">

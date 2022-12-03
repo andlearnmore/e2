@@ -170,6 +170,14 @@ a.product-link:hover {
     padding: 10px;
 }
 
+#product-new {
+    margin: 20px auto;
+    max-width: 75%;
+    background-color: rgb(109, 136, 204);
+    border-radius: 3px;
+    padding: 10px;
+}
+
 #product-review {
     margin: 20px auto;
     max-width: 75%;
