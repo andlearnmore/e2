@@ -7,19 +7,9 @@ use App\Nouns;
 class NounsController extends Controller 
 {
 
-    private $nounsObj;
-    public $quiz = ['happy', 'sad'];
-
-    public function __construct($app)
-    {
-        parent::__construct($app);
-        $this->nounsObj = new Nouns($this->app->path('/database/nouns.json'));
-
-    }
-
     public function index()
     {
-        $nouns = $this->nounsObj->getAll();
+        $nouns = $this->app->db()->getAll('nouns');
 
         return $this->app->view('nouns/index', ['nouns' => $nouns]);
     }
@@ -28,9 +18,9 @@ class NounsController extends Controller
     {
 
         // if (empty($this->quiz)) {
-        //     $this->quiz = $this->nounsObj->getQuiz();
+        //     $this->quiz = $this->app->db()->getQuiz();
         // } else {
-        //     $word = $this->nounsObj->getWord($this->quiz);
+        //     $word = $this->app->db()->getWord($this->quiz);
         // }
         
         

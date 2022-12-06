@@ -6,7 +6,6 @@ class Nouns
 {
     # Properties
     private $nouns = [];
-    private $quiz = [];
 
     # Methods
     public function __construct($dataSource)

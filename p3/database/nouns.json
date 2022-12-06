@@ -96,10 +96,17 @@
     },
 
     "13": {
-        "id": 13,
         "noun": "Getränk",
         "article": "das",
         "plural": "Getränke",
         "english": "drink"
+    }, 
+
+    "14": {
+        "noun": "Kind",
+        "article": "das",
+        "plural": "Kinder",
+        "english": "child"
     }
+
 }

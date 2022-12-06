@@ -2,11 +2,17 @@
 
 namespace App\Commands;
 
+use App\Nouns;
+
 class AppCommand extends Command
 {
-    public function test()
+
+    public function fresh()
     {
-        dump('It works! You invoked your first command.');
+        $this->migrate();
+        $this->seedNouns();
+
+        dump('It has all been refreshed!');
     }
 
     public function migrate()
@@ -19,5 +25,16 @@ class AppCommand extends Command
         ]);
 
         dump('Migration complete. Check the database for your new table(s).');
+    }
+
+    public function seedNouns()
+    {
+        $nouns = new Nouns($this->app->path('database/nouns.json'));
+
+        foreach ($nouns->getAll() as $noun) {
+            $this->app->db()->insert('nouns', $noun);
+        }
+
+        dump('The Nouns table has been seeded. Check it out!');
     }
 }
