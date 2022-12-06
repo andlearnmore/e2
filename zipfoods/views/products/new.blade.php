@@ -8,7 +8,7 @@
 
 
     @if ($productSaved)
-        <div class='alert alert-success'>Thank you, your product has been added. <a href='/product?sku={{ $sku }}'>
+        <div test='new-product-saved' class='alert alert-success'>Thank you, your product has been added. <a href='/product?sku={{ $sku }}'>
         You can view it here. </a></div>
     @endif
     
@@ -24,41 +24,41 @@
 
         <div class='form-group'>
             <label for='name'>Name</label>
-            <input type='text' class='form-control' name='name' id='name' value='{{ $app->old('name') }}'>
+            <input test='new-product-name-input' type='text' class='form-control' name='name' id='name' value='{{ $app->old('name') }}'>
         </div>
 
         <div class='form-group'>
             <label for='sku'>SKU</label>
-            <input type='text' class='form-control' name='sku' id='sku' value='{{ $app->old('sku') }}'>
+            <input test='new-product-sku-input' type='text' class='form-control' name='sku' id='sku' value='{{ $app->old('sku') }}'>
             <div class='info'>Can only contain numbers, letters, dashes, and/or underscores. </div>
         </div>
 
         <div class='form-group'>
             <label for='description'>Description</label>
-            <input type='text' class='form-control' name='description' id='description' value='{{ $app->old('description') }}'>
+            <input test='new-product-description-input' type='text' class='form-control' name='description' id='description' value='{{ $app->old('description') }}'>
         </div>
 
         <div class='form-group'>
             <label for='price'>Price</label>
-            <input type='text' class='form-control' name='price' id='price' value='{{ $app->old('price') }}'>
+            <input test='new-product-price-input' type='text' class='form-control' name='price' id='price' value='{{ $app->old('price') }}'>
         </div>
 
          <div class='form-group'>
             <label for='available'>Available</label>
-            <input type='text' class='form-control' name='available' id='available' value='{{ $app->old('available') }}'>
+            <input test='new-product-available-input' type='text' class='form-control' name='available' id='available' value='{{ $app->old('available') }}'>
         </div>
 
         <div class='form-group'>
             <label for='weight'>Weight</label>
-            <input type='text' class='form-control' name='weight' id='weight' value='{{ $app->old('weight') }}'>
+            <input test='new-product-weight-input' type='text' class='form-control' name='weight' id='weight' value='{{ $app->old('weight') }}'>
         </div>
 
         <div class='form-group'>
             <label for='perishable'>Perishable</label>
-            <input type='checkbox' class='checkbox' name='perishable' id='perishable' value='{{ $app->old('perishable') }}'>
+            <input test='new-product-perishable-input' type='checkbox' class='checkbox' name='perishable' id='perishable' value='{{ $app->old('perishable') }}'>
         </div>
 
-        <button type='submit' class='btn btn-primary'>Submit Review</button>
+        <button test='new-product-submit-button' type='submit' class='btn btn-primary'>Submit Review</button>
     </form>
 
     @if($app->errorsExist())

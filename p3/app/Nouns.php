@@ -6,7 +6,7 @@ class Nouns
 {
     # Properties
     private $nouns = [];
-    public $gameWords = [];
+    private $quiz = [];
 
     # Methods
     public function __construct($dataSource)
@@ -31,47 +31,47 @@ class Nouns
         return $this->getByNoun($nounId);
     }
 
-    public function getWord()
+    public function getQuiz()
     {
         # Get a new 'deck' of words from the array each time by shuffling.
         # Creating a variable so I can check if this is true/false for testing.
         $shuffle = shuffle($this->nouns);
+
+        $length = count($this->nouns) - 1;
+        $gameLength = 10;
+
+        # I'm hardcoding $gameLength above, but if I made it dynamic, 
+        # I want to make sure it's not longer than the actual array.
+        if ($length >= $gameLength) {
+            $gameLength = $gameLength;
+        } else {
+            $gameLength = $length;
+        };
+
+        $quiz = array_slice($this->nouns, 0, $gameLength);
+        
+        return $quiz;
+    }
+
+    public function getWord(array $quiz)
+    {
+        # Get a new 'deck' of words from the array each time by shuffling.
+        # Creating a variable so I can check if this is true/false for testing.
+        $shuffle = shuffle($this->quiz);
         $int = 0;
 
-        $word = $this->nouns[$int];
-        // return $word;
+        $word = $this->quiz[$int];
+        return $word;
 
         # Trying to make sure that words don't repeat but $gameWords isn't updating.
         # Need to find notes from class on thi
-        if (in_array($this->gameWords, $word) == false) {
-            $gameWords[] = array_push($word);
-            return $word;
-        } else {
-            $int++;
-        }
+        // if (in_array($this->gameWords, $word) == false) {
+        //     $gameWords[] = array_push($word);
+        //     return $word;
+        // } else {
+        //     $int++;
+        // }
             
     }
-
-    // public function getGameArray()
-    // {
-    //     # Get a new 'deck' of words from the array each time by shuffling.
-    //     # Creating a variable so I can check if this is true/false for testing.
-    //     $shuffle = shuffle($this->nouns);
-
-    //     $length = count($this->nouns) - 1;
-    //     $gameLength = 10;
-
-    //     # I'm hardcoding $gameLength above, but if I made it dynamic, 
-    //     # I want to make sure it's not longer than the actual array.
-    //     if ($length >= $gameLength) {
-    //         $gameLength = $gameLength;
-    //     } else {
-    //         $gameLength = $length;
-    //     };
-
-    //     $words = array_slice($this->nouns, 0, $gameLength);
-        
-    //     return $words;
-    // }
 
 }
