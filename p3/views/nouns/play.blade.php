@@ -8,7 +8,8 @@
    {{-- <div class="container-fluid"> --}}
         <h1>Play</h1>
         
-
+    {{-- CREATE TABLE, FILLING IN @FOREACH QUIZWORDS AS QUIZWORD  --}}
+    {{-- WITH der die das houses as radio buttons on left side --}}
     {{-- </div> --}}
 
 @endsection
