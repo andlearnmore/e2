@@ -18,36 +18,34 @@
 <body>
     {{-- <div class='container'> --}}
         <header class='d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom'>
-            <nav class='navbar bg-light'>
-            <div class='container'>
-                <a class='navbar-brand' href='#'>
-                <img src='/images/logo.svg' alt='The Blue Cake Logo' width='30' height='24'>
-                </a>
-            </div>
-            </nav>
+            <nav class='navbar'>
+                <div class='container'>
+                    <a class='navbar-brand' href='#'>
+                    <img src='/images/logo.svg' alt='The Blue Cake Logo' width='30' height='24'>
+                    </a>
+            
+                
 
-            {{-- TODO: INSERT LINKS TO PAGES AFTER I CREATE THEM. --}}
-            <ul class='nav nav-pills'>
-                @yield('nav1')<li class='nav-item'><a href='/' class='nav-link'>Home</a></li>
-                @yield('nav2')<li class='nav-item'><a href='/nouns/der-die-das' class='nav-link'>Der-die-das</a></li>
-                @yield('nav3')<li class='nav-item'><a href='/nouns' class='nav-link'>Noun List</a></li>
-                @yield('nav4')<li class='nav-item'><a href='#' class='nav-link'>History</a></li>
-            </ul>
+                    {{-- TODO: INSERT LINKS TO PAGES AFTER I CREATE THEM. --}}
+                    <ul class='nav nav-pills'>
+                        @yield('nav1')<li class='nav-item'><a href='/' class='nav-link'>Home</a></li>
+                        @yield('nav2')<li class='nav-item'><a href='/der-die-das' class='nav-link'>Der-die-das</a></li>
+                        @yield('nav3')<li class='nav-item'><a href='/nouns' class='nav-link'>Noun List</a></li>
+                        @yield('nav4')<li class='nav-item'><a href='#' class='nav-link'>History</a></li>
+                    </ul>
+                </div>
+            </nav>
         </header>
     {{-- </div> --}}
 
 <main>
-    <div class='welcome'>
-        <img alt='The Blue Cake Logo' id='logo' src='/images/logo.svg'>
-    </div>
 
     @yield('content')
     
 </main>
-    <div class='welcome'>
-        @yield('body')
-    </div>
+<body>
 
+    @yield('body')
 
 </body>
 </html>
