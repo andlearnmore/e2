@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-   {{-- <div class="container-fluid"> --}}
+   <div class='container-fluid text-center'>
         <h1>All Nouns</h1>
         
         @foreach ($nouns as $noun)
@@ -15,6 +15,6 @@
                 </div>
             </a>
         @endforeach
-    {{-- </div> --}}
+    </div>
 
 @endsection

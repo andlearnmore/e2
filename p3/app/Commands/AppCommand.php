@@ -17,6 +17,17 @@ class AppCommand extends Command
 
     public function migrate()
     {
+
+        $this->app->db()->createTable('games', [
+            'timestamp' => 'timestamp',
+            'game_number' => 'int',
+            'noun_id' => 'int',
+            'noun' => 'varchar(255)',
+            'article' => 'varchar(3)',
+            'guess' => 'varchar(255)',
+            'correct' => 'tinyint(1)'
+        ]);
+
         $this->app->db()->createTable('nouns', [
             'noun' => 'varchar(255)',
             'article' => 'varchar(3)',
@@ -37,4 +48,6 @@ class AppCommand extends Command
 
         dump('The Nouns table has been seeded. Check it out!');
     }
+
+    # TODO: CREATE seedGames()
 }

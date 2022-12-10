@@ -24,13 +24,4 @@ class Nouns
     {
         return $this->nouns[$id] ?? null;
     }
-
-    # Do I need this?
-    public function getByNoun(string $noun)
-    {
-        $nounId = array_search($noun, array_column($this->nouns, 'noun', 'id'));
-        return $this->getById($nounId);
-    }
-
-
 }
