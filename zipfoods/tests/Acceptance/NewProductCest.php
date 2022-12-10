@@ -36,8 +36,8 @@ class NewProductCest
         $weight = '0.22';
         $I->fillField('[test=new-product-weight-input]', $weight);
 
-        // $perishable = '1';
-        // $I->ChoiceFormField('[test=new-product-perishable-input]', $perishable);
+        $perishable = '';
+        $I->selectOption('[test=new-product-perishable-input]', $perishable);
 
         $I->click('[test=new-product-submit-button]');
 
