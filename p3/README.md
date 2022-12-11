@@ -1,12 +1,22 @@
-# e2framework
+ 
 
-*e2framework* is a rudimentary PHP framework designed for the course [DGMD E-2 Web Programming for Beginners with PHP](https://hesweb.dev/e2).
+# Project 3
++ By: Anne Dwojeski-Santos
++ URL: <http://e2p3.andlearn.me>
 
-The goal of this software is to provide students an introduction to working with more advanced PHP frameworks such as Laravel and/or Symfony.
+## Graduate requirement
+*x one of the following:*
++ [ x] I have integrated testing into my application
++ [ ] I am taking this course for undergraduate credit and have opted out of integrating testing into my application
 
-+ __Documentation:__ <https://hesweb.dev/e2/notes/php/e2framework/installation>
-+ __Guide:__ <https://hesweb.dev/e2/notes/php/frameworks/intro>
+## Outside resources
++ https://stackoverflow.com/questions/4100786/how-to-create-an-array-of-a-group-of-items-inside-an-html-form
+
+## Notes for instructor
+*any notes for me to refer to while grading; if none, omit this section*
+
+## Codeception testing output
 
 
 
-https://stackoverflow.com/questions/4100786/how-to-create-an-array-of-a-group-of-items-inside-an-html-form
+

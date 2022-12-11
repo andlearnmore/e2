@@ -26,8 +26,7 @@
                 {{-- TODO: INSERT LINKS TO PAGES AFTER I CREATE THEM. --}}
                 <ul class='nav nav-pills'>
                     @yield('nav1')<li class='nav-item'><a href='/' class='nav-link'>Home</a></li>
-                    @yield('nav3')<li class='nav-item'><a href='/nouns' class='nav-link'>Noun List</a></li>
-                    @yield('nav2')<li class='nav-item'><a href='/nouns/start/' class='nav-link'>Play</a></li>
+                    @yield('nav3')<li class='nav-item'><a href='/all-nouns' class='nav-link'>Noun List</a></li>
                     @yield('nav4')<li class='nav-item'><a href='#' class='nav-link'>History</a></li>
                 </ul>
             </div>
