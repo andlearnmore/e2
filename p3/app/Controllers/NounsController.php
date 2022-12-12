@@ -17,7 +17,9 @@ class NounsController extends Controller
     {
         $nouns = $this->app->db()->all('nouns');
         $games = $this->app->db()->all('games');
+        
         $newGame = true;
+        $gameLength = 5;
         $gameOver = false;
         
         $newRound = true;
@@ -34,21 +36,18 @@ class NounsController extends Controller
                 $newGame = false;
                 $gameNumber = $gameNumber;
             }
-            dump('Game number');
-            dump($gameNumber);
 
             $round = $this->app->old('round');
             if (is_null($round)) {
-                $recentGameId = (reset($games));
-                dump('recentGameId');
-                dump($recentGameId);
-                $round = ($recentGameId == false) ? 0 : (($recentGameId['round']) + 1);
+                $round = 0;
             } else {
                 $round = $round++;
+                $gameOver = ($round < $gameLength) ? false : true;
+                if ($gameOver == true) {
+                    return $this->app->view('/index', [ 'gameOver' => $gameOver]);
+                }
             }
-            dump('Round');
-            dump($round);
-            
+    
             # If we're not returning a response:
             # Select a random word key from nouns and get the word details.
             $key = array_rand($nouns, 1);
@@ -60,7 +59,8 @@ class NounsController extends Controller
                 'gameNumber' => $gameNumber,
                 'nounId' => $gameWord['id'],
                 'noun' => $gameWord['noun'],
-                'round' => $round
+                'round' => $round,
+                'timestamp' => date('Y:m:d')
             ]);
 
             return $this->app->view('/index', [
@@ -76,20 +76,11 @@ class NounsController extends Controller
             $correct = $this->app->old('correct');
             $gameNumber = $this->app->old('gameNumber');
             $noun = $this->app->old('noun');
-            $round = $this->app->old('round');
+            $round = ($this->app->old('round')) + 1;
 
             $newGame = false;
             $newRound = false;
 
-
-            dump($article);
-            dump($correct);
-            dump($gameNumber);
-            dump($gameOver);
-            dump($newGame);
-            dump($newRound);
-            dump($noun);
-            dump($round);
             return $this->app->view('/index', [
                 'article' => $article,
                 'correct' => $correct,
@@ -101,33 +92,40 @@ class NounsController extends Controller
                 'round' => $round
             ]);
         }
-    
     }
 
     public function nextWord()
     {
-    # Pull in quiz
-    $inputs = $this->app->inputAll();
+        # Pull in quiz
+        $inputs = $this->app->inputAll();
 
-    # validate inputs
-    $this->app->validate([
-        'gameNumber' => 'required|numeric',
-        'newRound' => 'required',
-        'round' => 'required'
-    ]);
+        # validate inputs
+        $this->app->validate([
+            'gameNumber' => 'required|numeric',
+            'newRound' => 'required',
+            'round' => 'required'
+        ]);
 
-    $gameNumber = $this->app->input('gameNumber');
-    $newRound = $this->app->input('newRound');
-    $nextWord = $this->app->input('nextWord');
-    $round = $this->app->input('round');
+        $gameNumber = $this->app->input('gameNumber');
+        $newRound = $this->app->input('newRound');
+        $nextWord = $this->app->input('nextWord');
+        $round = $this->app->input('round');
 
-    return $this->app->redirect('/', [
-        'gameNumber' => $gameNumber,
-        'newRound' => $newRound,
-        'nextWord' => $nextWord,
-        'round' => $round
-    ]);
+        return $this->app->redirect('/', [
+            'gameNumber' => $gameNumber,
+            'newRound' => $newRound,
+            'nextWord' => $nextWord,
+            'round' => $round
+        ]);
+    }
 
+    public function results()
+    {
+        $results = $this->app->db()->all('games');
+        dump($results);
+        return $this->app->view('/results', [
+            'results' => $results
+        ]);
     }
 
     public function scorePlay()

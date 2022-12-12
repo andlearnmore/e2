@@ -3,6 +3,7 @@
 namespace App\Commands;
 
 use App\Nouns;
+use Faker\Factory;
 
 class AppCommand extends Command
 {
@@ -11,6 +12,7 @@ class AppCommand extends Command
     {
         $this->migrate();
         $this->seedNouns();
+        $this->seedGames();
 
         dump('It has all been refreshed!');
     }
@@ -19,7 +21,7 @@ class AppCommand extends Command
     {
 
         $this->app->db()->createTable('games', [
-            'timestamp' => 'timestamp',
+            'timestamp' => 'date',
             'gameNumber' => 'int',
             'round' => 'int',
             'nounId' => 'int',
@@ -48,6 +50,28 @@ class AppCommand extends Command
         }
 
         dump('The Nouns table has been seeded. Check it out!');
+    }
+
+    public function seedGames()
+    {
+        $faker = Factory::create();
+
+
+        for ($i = 0; $i < 5; $i++) {
+            $this->app->db()->insert('games', [
+                'article' => $faker->randomElement(['der', 'die', 'das']),
+                'correct' => $faker->numberBetween(0,1),
+                'gameNumber' => 0,
+                'guess' => $faker->randomElement(['der', 'die', 'das']),
+                'noun' => $faker->randomElement(['Kuh', 'Ente', 'Tiger', 'Löwe', 'Pferd']),
+                'nounId' => $faker->numberBetween(0,9),
+                'round' => $i,
+                'timestamp' => '2022-12-06'
+            ]);
+        }
+
+        dump('The Games table has been seeded. Check it out!');
+
     }
 
     # TODO: CREATE seedGames()

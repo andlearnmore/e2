@@ -7,6 +7,7 @@ return [
     '/' => ['NounsController', 'index'],
     '/all-nouns' => ['NounsController', 'allNouns'],
     '/next-word' => ['NounsController', 'nextWord'],
+    '/results' => ['NounsController', 'results'],
     '/score-play' => ['NounsController', 'scorePlay']
     
 ];

@@ -11,6 +11,7 @@
 
 ## Outside resources
 + https://stackoverflow.com/questions/4100786/how-to-create-an-array-of-a-group-of-items-inside-an-html-form
++ https://laracasts.com/discuss/channels/laravel/is-it-possible-to-conditionally-seed-the-database : for adding function to seed
 
 ## Notes for instructor
 *any notes for me to refer to while grading; if none, omit this section*
