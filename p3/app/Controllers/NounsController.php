@@ -64,19 +64,9 @@ class NounsController extends Controller
                 }
             }
     
-            # If we're not returning a response:
-            # Select a random word key from nouns and get the word details.
+            # If we're not returning a response, select a random word key from nouns and get the word details.
             $key = array_rand($nouns, 1);
             $gameWord = $nouns[$key];
-
-            # Insert the new game word and details into the DB.
-            $this->app->db()->insert('rounds', [
-                'article' => $gameWord['article'],
-                'gameNumber' => $gameNumber,
-                'nounId' => $gameWord['id'],
-                'noun' => $gameWord['noun'],
-                'round' => $round,
-            ]);
 
             return $this->app->view('/index', [
                 'gameWord' => $gameWord,
@@ -90,17 +80,18 @@ class NounsController extends Controller
             $article = $this->app->old('article');
             $correct = $this->app->old('correct');
             $gameNumber = $this->app->old('gameNumber');
-            $noun = $this->app->old('noun');
-            $round = ($this->app->old('round')) + 1;
-
+            $guess = $this->app->old('guess');
             $newGame = false;
             $newRound = false;
+            $noun = $this->app->old('noun');
+            $round = ($this->app->old('round')) + 1;
 
             return $this->app->view('/index', [
                 'article' => $article,
                 'correct' => $correct,
                 'gameNumber' => $gameNumber,
                 'gameOver' => $gameOver,
+                'guess' => $guess,
                 'newGame' => $newGame,
                 'newRound' => $newRound,
                 'noun' => $noun,
@@ -136,7 +127,9 @@ class NounsController extends Controller
 
     public function gameResults()
     {
-        return $this->app->view('/results');
+        $gameNumber = $this->app->param('id');
+        $results = $this->app->db()->findbyColumn('rounds', 'gameNumber', '=', $gameNumber);
+        return $this->app->view('/results', ['results' => $results, 'gameNumber' => $gameNumber]);
     }
 
     public function games()
@@ -172,18 +165,18 @@ class NounsController extends Controller
 
         # Compare input to answer
         $correct = ($guess == $article) ? 1 : 0;
-        
-        # SQL statement with named parameters
-        $sql = 'UPDATE rounds SET guess = :guess, correct = :correct WHERE gameNumber = :gameNumber AND nounId = :nounId';
 
-        $data = [
-            'guess' => $guess,
+        # Insert the new game word and details into the DB.
+        $this->app->db()->insert('rounds', [
+            'article' => $article,
             'correct' => $correct,
             'gameNumber' => $gameNumber,
-            'nounId' => $id
-            ];
-
-        $executed = $this->app->db()->run($sql, $data);
+            'guess' => $guess,
+            'nounId' => $id,
+            'noun' => $noun,
+            'round' => $round,
+        ]);
+        
         # Return results
         return $this->app->redirect('/', [
             'article' => $article,
