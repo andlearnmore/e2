@@ -20,9 +20,9 @@ class AppCommand extends Command
 
         $this->app->db()->createTable('games', [
             'timestamp' => 'timestamp',
-            'game_number' => 'int',
+            'gameNumber' => 'int',
             'round' => 'int',
-            'noun_id' => 'int',
+            'nounId' => 'int',
             'noun' => 'varchar(255)',
             'article' => 'varchar(3)',
             'guess' => 'varchar(255)',

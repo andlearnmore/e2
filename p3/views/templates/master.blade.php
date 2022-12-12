@@ -15,7 +15,7 @@
 
 </head>
 <body>
-
+    <div class='container'>
     <header class='d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom'>
         <nav class='navbar'>
             <div class='container'>
@@ -33,10 +33,10 @@
         </nav>
     </header>
 
-<main>
-    @yield('content')
-</main>
-
+    <main>
+        @yield('content')
+    </main>
+    </div>
 @yield('body')
 
 </body>
