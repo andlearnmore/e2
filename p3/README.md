@@ -14,8 +14,7 @@
 + https://laracasts.com/discuss/channels/laravel/is-it-possible-to-conditionally-seed-the-database : for adding function to seed
 
 ## Notes for instructor
-*any notes for me to refer to while grading; if none, omit this section*
-
++ My Games table seeds have game numbers that go in the opposite order of the timestamp. This is because I use 'reset($games))' to get the most recent game number.
 ## Codeception testing output
 
 

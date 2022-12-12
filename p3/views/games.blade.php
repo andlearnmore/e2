@@ -10,7 +10,9 @@
         
         <div>
             <ul>
-               DEETS
+                @foreach ($games as $game)
+                    <li><a href='/results?id={{ $game['gameNumber'] }}'>{{ $game['timestamp'] }}</li>
+                @endforeach
             </ul>
          </div>
 

@@ -19,7 +19,7 @@ class NounsController extends Controller
         $games = $this->app->db()->all('games');
         
         $newGame = true;
-        $gameLength = 5;
+        $gameLength = 6;
         $gameOver = false;
         
         $newRound = true;
@@ -31,7 +31,7 @@ class NounsController extends Controller
             if (is_null($gameNumber)) {
                 # Determine new game number by incrementing most recent one.
                 $recentGameId = (reset($games));
-                $gameNumber = ($recentGameId == false) ? 0 : (($recentGameId['gameNumber']) + 1);
+                $gameNumber = ($recentGameId == false) ? 1 : (($recentGameId['gameNumber']) + 1);
             } else {
                 $newGame = false;
                 $gameNumber = $gameNumber;
@@ -39,11 +39,27 @@ class NounsController extends Controller
 
             $round = $this->app->old('round');
             if (is_null($round)) {
-                $round = 0;
+                $round = 1;
             } else {
                 $round = $round++;
                 $gameOver = ($round < $gameLength) ? false : true;
                 if ($gameOver == true) {
+
+                    # Add up the number of correct guesses for current game using rounds table.
+                    $roundResults = $this->app->db()->findByColumn('rounds', 'gameNumber', '=', $gameNumber);
+                    foreach ($roundResults as $roundResult) {
+                        $guesses []= $roundResult['correct'];
+                    }
+                    $correctGuesses = array_sum($guesses);
+                    $total = count($roundResults);
+
+                    $this->app->db()->insert('games', [
+                        'timestamp' => date('Y-m-d H:i:s'),
+                        'gameNumber' => $gameNumber,
+                        'correctGuesses' => $correctGuesses,
+                        'total' => $total
+                    ]);
+        
                     return $this->app->view('/index', [ 'gameOver' => $gameOver]);
                 }
             }
@@ -54,13 +70,12 @@ class NounsController extends Controller
             $gameWord = $nouns[$key];
 
             # Insert the new game word and details into the DB.
-            $this->app->db()->insert('games', [
+            $this->app->db()->insert('rounds', [
                 'article' => $gameWord['article'],
                 'gameNumber' => $gameNumber,
                 'nounId' => $gameWord['id'],
                 'noun' => $gameWord['noun'],
                 'round' => $round,
-                'timestamp' => date('Y:m:d')
             ]);
 
             return $this->app->view('/index', [
@@ -119,12 +134,17 @@ class NounsController extends Controller
         ]);
     }
 
-    public function results()
+    public function gameResults()
     {
-        $results = $this->app->db()->all('games');
-        dump($results);
-        return $this->app->view('/results', [
-            'results' => $results
+        return $this->app->view('/results');
+    }
+
+    public function games()
+    {
+        $games = $this->app->db()->all('games');
+        dump($games);
+        return $this->app->view('/games', [
+            'games' => $games
         ]);
     }
 
@@ -154,7 +174,7 @@ class NounsController extends Controller
         $correct = ($guess == $article) ? 1 : 0;
         
         # SQL statement with named parameters
-        $sql = 'UPDATE games SET guess = :guess, correct = :correct WHERE gameNumber = :gameNumber AND nounId = :nounId';
+        $sql = 'UPDATE rounds SET guess = :guess, correct = :correct WHERE gameNumber = :gameNumber AND nounId = :nounId';
 
         $data = [
             'guess' => $guess,

@@ -39,8 +39,8 @@
                     <h2> Game Over! </h2>
                     <div class='col'>
                         <div class='row align-items-end'>
-                            <a href='/results'>
-                            <button class='btn btn-primary' type='submit'>Results</button>
+                            <a href='/games'>
+                            <button class='btn btn-primary' type='submit'>All Games</button>
                             </a>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
 
                             <div class='row align-items-center'>
                                 <div class='col'>
-                                    <input type='radio' id='{{ $gameWord['noun'] }}-der-guess' name='guess' value='der'>
+                                    <input type='radio' id='{{ $gameWord['noun'] }}-der-guess' name='guess' value='der' checked>
                                     <label for='{{ $gameWord['noun'] }}-der-guess'><img src='/images/buttons/house-blue.svg'>der</label>
                                 </div>
                                 <div class='col'>
@@ -96,20 +96,27 @@
         @else
             <div class='container-sm'>
                 @if($correct == 1)
-                    <div class='alert alert-light' role='alert'>
-                        <h3>Correct!</h3>
-                @else
-                    <div class='alert alert-dark' role='alert'>
+                    <div class='alert alert-success' role='alert'>
                         <div class='col'>
-                                <div class='row align-items-end'>
-                                    <h3>That's not it. The answer is:</h3>
-                                </div>
+                            <div class='row align-items-end'>
+                                <h4>Correct!</h4>
+                                <h3>{{ $article . ' '. $noun}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class='alert alert-danger' role='alert'>
+                        <div class='col'>
+                            <div class='row align-items-end'>
+                                <h4>Incorrect. The answer is:</h4>
+                                <h3> {{ $article . ' '. $noun}}</h3>
+                            </div>
                         </div>
                     </div>
 
                 @endif
 
-                @if($article == 'der')
+                {{-- @if($article == 'der')
                     <div class='alert alert-primary' role='alert'>
                         <div class='col'>
                             <div class='row align-items-end'>
@@ -133,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
                 <form method='POST' action='/next-word'>
                     {{-- <input type='hidden' name='article' value='{{ $article }}'> --}}
