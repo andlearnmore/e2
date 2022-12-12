@@ -50,6 +50,6 @@ class ProductPageCest
     {
         $I->amOnPage('/product?sku=gum');
 
-        $I->see('Product Not Found');
+        $I->seeElement('[test=product-not-found-header]');
     }
 }
