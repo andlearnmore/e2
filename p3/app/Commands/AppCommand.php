@@ -21,6 +21,7 @@ class AppCommand extends Command
         $this->app->db()->createTable('games', [
             'timestamp' => 'timestamp',
             'game_number' => 'int',
+            'round' => 'int',
             'noun_id' => 'int',
             'noun' => 'varchar(255)',
             'article' => 'varchar(3)',
