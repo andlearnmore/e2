@@ -5,8 +5,7 @@
 + URL: <http://e2p3.andlearn.me>
 
 ## Graduate requirement
-*x one of the following:*
-+ [ x] I have integrated testing into my application
++ [x] I have integrated testing into my application
 + [ ] I am taking this course for undergraduate credit and have opted out of integrating testing into my application
 
 ## Outside resources
