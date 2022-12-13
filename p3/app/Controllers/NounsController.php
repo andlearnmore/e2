@@ -13,6 +13,24 @@ class NounsController extends Controller
         return $this->app->view('/all-nouns', ['nouns' => $nouns]);
     }
 
+    public function gameOver()
+    {
+        return $this->app->view('/game-over');
+    }
+
+    public function gameResults()
+    {
+        $gameNumber = $this->app->param('id');
+        $results = $this->app->db()->findbyColumn('rounds', 'gameNumber', '=', $gameNumber);
+        return $this->app->view('/results', ['results' => $results, 'gameNumber' => $gameNumber]);
+    }
+
+    public function games()
+    {
+        $games = $this->app->db()->all('games');
+        return $this->app->view('/games', ['games' => $games]);
+    }
+
     public function index()
     {
         $nouns = $this->app->db()->all('nouns');
@@ -38,7 +56,7 @@ class NounsController extends Controller
 
             # Determine round number and check if game is over.
             $round = $this->app->old('round');
-            if (is_null($round)) {
+            if ($newGame == true) {
                 $round = 1;
             } else {
                 $round = $round++;
@@ -64,7 +82,7 @@ class NounsController extends Controller
                 }
             }
     
-            # If we're not returning a response, select a random word key from nouns and get the word details.
+            # Select a random word key from nouns and get the word details.
             $key = array_rand($nouns, 1);
             $gameWord = $nouns[$key];
 
@@ -105,13 +123,6 @@ class NounsController extends Controller
         # Pull in quiz
         $inputs = $this->app->inputAll();
 
-        # validate inputs
-        $this->app->validate([
-            'gameNumber' => 'required|numeric',
-            'newRound' => 'required',
-            'round' => 'required'
-        ]);
-
         $gameNumber = $this->app->input('gameNumber');
         $newGame = false;
         $newRound = $this->app->input('newRound');
@@ -122,26 +133,6 @@ class NounsController extends Controller
             'newGame' => $newGame,
             'newRound' => $newRound,
             'round' => $round
-        ]);
-    }
-
-    public function gameResults()
-    {
-        $gameNumber = $this->app->param('id');
-        $results = $this->app->db()->findbyColumn('rounds', 'gameNumber', '=', $gameNumber);
-        return $this->app->view('/results', ['results' => $results, 'gameNumber' => $gameNumber]);
-    }
-
-    public function gameOver()
-    {
-        return $this->app->view('/game-over');
-    }
-    public function games()
-    {
-        $games = $this->app->db()->all('games');
-        dump($games);
-        return $this->app->view('/games', [
-            'games' => $games
         ]);
     }
 
@@ -168,9 +159,23 @@ class NounsController extends Controller
         $noun = $this->app->input('noun');
         $round = $this->app->input('round');
 
-        # Compare input to answer
+        # Compare input to answer.
         $correct = ($guess == $article) ? 1 : 0;
 
+        # Delete any round data if game was restarted.
+        $roundsData = $this->app->db()->findByColumn('rounds', 'gameNumber', '=', $gameNumber);
+        if ($roundsData) {
+            if ($roundsData[0]['round'] == $round) {
+                $sql = 'DELETE FROM rounds WHERE gameNumber = :gameNumber';
+
+                $data = [
+                    'gameNumber' => $gameNumber,
+                ];
+
+                $executed = $this->app->db()->run($sql, $data);
+            }
+        }
+   
         # Insert the new game word and details into the DB.
         $this->app->db()->insert('rounds', [
             'article' => $article,

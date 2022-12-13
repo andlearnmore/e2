@@ -28,8 +28,6 @@
     <div>
     @if($newRound == true)
         <div class='flex-wrap justify-content-center py-3 mb-4'>
-        {{-- </div> --}}
-        {{-- <div class='d-flex flex-col justify-content-center py-3 mb-4'> --}}
             <form test='game-form' method='POST' action='/score-play'>
                 <div class='alert alert-info' role='alert'>
                     <div class='col'>

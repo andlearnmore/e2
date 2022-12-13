@@ -14,7 +14,6 @@ class Nouns
         $this->nouns = json_decode($json, true);
     }
 
-    # USED
     public function getAll()
     {
         return $this->nouns;
@@ -25,17 +24,4 @@ class Nouns
         return $this->nouns[$id] ?? null;
     }
 
-
-    // public function getByArticle(string $article)
-    // {
-    //     return $this->nouns[$article] ?? null;
-    // }
-
-    // public function getArticle(string $noun)
-    // {
-    //     # Adapted this code from DGMD E-2 Zipfoods Products example
-    //     $correctArticle = array_search($noun, array_column($this->nouns, 'noun', 'article'));
-    //     return $correctArticle;
-
-    // }
 }
