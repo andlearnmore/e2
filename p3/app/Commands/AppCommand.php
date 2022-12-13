@@ -51,11 +51,11 @@ class AppCommand extends Command
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i <7 ; $i++) {
+        for ($i = 0; $i < 3 ; $i++) {
             $this->app->db()->insert('games', [
                 'timestamp' => $faker->dateTimeBetween('-'.$i.' days', 'now')->format('Y-m-d H:i:s'),
                 'gameNumber' => $i + 1,
-                'correctGuesses' => $faker->numberBetween(0, 5),
+                'correctGuesses' => 3,
                 'total' => 5
             ]);
         }
@@ -68,18 +68,25 @@ class AppCommand extends Command
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 5; $i++) {
-            $this->app->db()->insert('rounds', [
-                'gameNumber' => 0,
-                'round' => $i,
-                'nounId' => $faker->numberBetween(20,30),
-                'noun' => $faker->randomElement(['Kuh', 'Ente', 'Tiger', 'Löwe', 'Pferd']),
-                'article' => $faker->randomElement(['der', 'die', 'das']),
-                'guess' => $faker->randomElement(['der', 'die', 'das']),
-                'correct' => $faker->numberBetween(0,1)
-            ]);
-        }
+        $seedNouns = ['Kuchen', 'Geburtstag', 'Geschenk', 'Kerze', 'Gabel'];
+        $seedArticles = ['der', 'der', 'das', 'das', 'die', 'die'];
+        $seedGuesses = ['der', 'die', 'das', 'der', 'die', 'das'];
+        $seedCorrect = ['1', '0', '1', '0', '1', '0'];
 
+        for ($j = 0; $j < 3; $j++) {
+            for ($i = 0; $i < 5; $i++) {
+                $this->app->db()->insert('rounds', [
+                    'gameNumber' => $j+1,
+                    'round' => $i+1,
+                    'nounId' => $i+1,
+                    'noun' => $seedNouns[$i],
+                    'article' => $seedArticles[$i],
+                    'guess' => $seedGuesses[$i],
+                    'correct' => $seedCorrect[$i],
+                ]);
+            }
+        }
+            
         dump('The Rounds table has been seeded. Check it out!');
 
     }

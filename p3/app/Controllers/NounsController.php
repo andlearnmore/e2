@@ -21,14 +21,13 @@ class NounsController extends Controller
         $newGame = true;
         $gameLength = 6;
         $gameOver = false;
-        
         $newRound = true;
 
         $correct = $this->app->old('correct');
-        if (is_null($correct)) {
-            # Get new game number for new game. If here by redirect, get old game number.
+        # If there are no results ('correct'), set up a new round, otherwise, show results.
+        if (is_null($correct)) {  
             $gameNumber = $this->app->old('gameNumber'); 
-            if (is_null($gameNumber)) {
+            if (is_null($gameNumber)) { 
                 # Determine new game number by incrementing most recent one.
                 $recentGameId = (reset($games));
                 $gameNumber = ($recentGameId == false) ? 1 : (($recentGameId['gameNumber']) + 1);
@@ -36,6 +35,7 @@ class NounsController extends Controller
                 $newGame = false;
                 $gameNumber = $gameNumber;
             }
+            dump($newGame);
 
             $round = $this->app->old('round');
             if (is_null($round)) {
@@ -60,7 +60,7 @@ class NounsController extends Controller
                         'total' => $total
                     ]);
         
-                    return $this->app->view('/index', [ 'gameOver' => $gameOver]);
+                    return $this->app->view('/game-over', [ 'gameOver' => $gameOver, 'newGame' => false]);
                 }
             }
     
@@ -76,7 +76,7 @@ class NounsController extends Controller
                 'newRound' => $newRound,
                 'round' => $round
             ]);
-        } else {
+        } else { # If there are results, show them
             $article = $this->app->old('article');
             $correct = $this->app->old('correct');
             $gameNumber = $this->app->old('gameNumber');
@@ -113,14 +113,14 @@ class NounsController extends Controller
         ]);
 
         $gameNumber = $this->app->input('gameNumber');
+        $newGame = false;
         $newRound = $this->app->input('newRound');
-        $nextWord = $this->app->input('nextWord');
         $round = $this->app->input('round');
 
         return $this->app->redirect('/', [
             'gameNumber' => $gameNumber,
+            'newGame' => $newGame,
             'newRound' => $newRound,
-            'nextWord' => $nextWord,
             'round' => $round
         ]);
     }
@@ -132,6 +132,10 @@ class NounsController extends Controller
         return $this->app->view('/results', ['results' => $results, 'gameNumber' => $gameNumber]);
     }
 
+    public function gameOver()
+    {
+        return $this->app->view('/game-over');
+    }
     public function games()
     {
         $games = $this->app->db()->all('games');
@@ -160,6 +164,7 @@ class NounsController extends Controller
         $gameNumber = $this->app->input('gameNumber');
         $guess = $this->app->input('guess');
         $id = $this->app->input('id');
+        $newGame = false;
         $noun = $this->app->input('noun');
         $round = $this->app->input('round');
 

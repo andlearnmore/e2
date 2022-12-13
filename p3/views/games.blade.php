@@ -1,12 +1,12 @@
 @extends('templates/master')
 
 @section('title')
-    Games
+    Game History
 @endsection
 
 @section('content')
    <div class='container-fluid text-center'>
-        <h1>Games</h1>
+        <h1>Game History</h1>
         
         <div>
             <ul>

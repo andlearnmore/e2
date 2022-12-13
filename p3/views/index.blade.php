@@ -5,43 +5,30 @@
 @endsection
 
 @section('body')
-<div class='container-sm'>
-    <div class='row'>
-        <div class='col-sm'>
-            @if($app->errorsExist())
-                <ul class='error alert alert-danger'>
-                    @foreach($app->errors() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
-        <div class='alert alert-light' role='alert'>
-            <h1>Der-Die-Das Game</h1>
-            <p>{{ $app->config('app.name') }} ("der blaue Kuchen" in German) is an app for practicing your German vocabulary.</p>
-            <h3>How to Play</h3>
-            <p>You'll be given a series of German nouns. Select the correct article for the noun.</p>
-        </div>
-    </div>
-</div>
-<div>
-    @if($gameOver == true) 
-        <div class='container-sm'>
-            <div class='row align-items-center'>
-                <div class='col align-self-center'>
-                    <h2> Game Over! </h2>
-                    <div class='col'>
-                        <div class='row align-items-end'>
-                            <a href='/games'>
-                            <button class='btn btn-primary' type='submit'>All Games</button>
-                            </a>
-                        </div>
-                    </div>
+    <div class='container-sm'>
+        <div class='row'>
+            <div class='col-sm'>
+                @if($app->errorsExist())
+                    <ul class='error alert alert-danger'>
+                        @foreach($app->errors() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+            <div class='alert alert-light' role='alert'>
+                <h1>The Blue Cake Game: der-die-das</h1>
+                <div {{ ($newGame == false) ? 'hidden' : '' }}>
+                    <p>{{ $app->config('app.name') }} ("der blaue Kuchen" in German) is an app for practicing your German vocabulary.</p>
+                    <p>In German, there are three different definite articles (or basic ways to say 'the') for nouns: masculine ('der'), feminine ('die'), and neuter ('das'). In school, children learn these by writing the nouns<span>&mdash;</span>or putting puctures of them<span>&mdash;</span>in little colorful houses (blue=der, red=die, green=das). The article for 'Kuchen' is 'der' so it would go in the blue house. This is how the game gets its name!</p>
+                    <h3>How to Play</h3>
+                    <p>You'll be given a series of German nouns. Select the correct article for the noun by clicking on the appropriate article-house.</p>
                 </div>
             </div>
         </div>
-    @else
-        @if($newRound == true)
+    </div>
+    <div>
+    @if($newRound == true)
         <div class='container-sm'>
             <div class='row'>
                 <div class='col'>
@@ -87,47 +74,43 @@
                 </div>
             </div>
         </div>
-        @else
-            <div test='feedback-div' class='container-sm feedback'>
-            <span hidden test='article-output'>{{ $article }}</span>
-                @if($correct == 1)
-                    <div class='alert alert-success' role='alert'>
-                        <div class='col'>
-                            <div class='row align-items-end'>
-                                <div test='correct-output'><h4>Correct!</h4></div>
-                                <h3>{{ $article . ' '. $noun}}</h3>
-                            </div>
+    @else
+        <div test='feedback-div' class='container-sm feedback'>
+        <span hidden test='article-output'>{{ $article }}</span>
+            @if($correct == 1)
+                <div class='alert alert-success' role='alert'>
+                    <div class='col'>
+                        <div class='row align-items-end'>
+                            <div test='correct-output'><h4>Correct!</h4></div>
+                            <h3>{{ $article . ' '. $noun}}</h3>
                         </div>
                     </div>
-                @else
-                    <div class='alert alert-danger' role='alert'>
-                        <div class='col'>
-                            <div class='row align-items-end'>
-                                <div test='incorrect-output'> <h4>Incorrect. You selected '{{ $guess }} {{ $noun }}'. The answer is:</h4></div>
-                                <h3> {{ $article . ' '. $noun}}</h3>
-                            </div>
+                </div>
+            @else
+                <div class='alert alert-danger' role='alert'>
+                    <div class='col'>
+                        <div class='row align-items-end'>
+                            <div test='incorrect-output'> <h4>Incorrect. You selected '{{ $guess }} {{ $noun }}'. The answer is:</h4></div>
+                            <h3> {{ $article . ' '. $noun}}</h3>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
 
-                <form method='POST' action='/next-word'>
-                    <input type='hidden' name='correct' value=null>
-                    <input type='hidden' name='gameNumber' value='{{ $gameNumber }}'>
-                    <input type='hidden' name='newRound' value='true'>
-                    <input type='hidden' name='round' value='{{ $round }}'>
-                    <div class='alert alert-light' role='alert'>
-                        <div class='col'>
-                            <div class='row align-items-end'>
-                                <button class='btn btn-primary' name='nextWord' type='submit' value='true'>Next word</button>
-                            </div>
+            <form method='POST' action='/next-word'>
+                <input type='hidden' name='correct' value=null>
+                <input type='hidden' name='gameNumber' value='{{ $gameNumber }}'>
+                <input type='hidden' name='newRound' value='true'>
+                <input type='hidden' name='round' value='{{ $round }}'>
+                <div class='alert alert-light' role='alert'>
+                    <div class='col'>
+                        <div class='row align-items-end'>
+                            <button class='btn btn-primary' name='nextWord' type='submit' value='true'>Next word</button>
                         </div>
                     </div>
-                </form>
-            </div>
-
-        @endif
+                </div>
+            </form>
+        </div>
     @endif
-
     
-
 @endsection

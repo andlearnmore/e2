@@ -27,6 +27,11 @@
                 </tbody>
             </table>
         </div>
+        <div> 
+        <a href='/games'>
+            <button class='btn btn-primary' type='submit'>Game History</button>
+        </a>
+        </div>
 
     </div>
 
