@@ -5,36 +5,16 @@
 @endsection
 
 @section('content')
-   <div class='container-fluid text-center'>
-        <div class='container'>
-            <div class='row'>
-                <div class='col'>
-                </div>
-                <div class='col noun-name'>
-                    <h1>All Nouns</h1>
-                </div>
-                <div class='col'>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col'>
-                </div>
-                <div class='col'>
-                    @foreach ($nouns as $noun)
-                    <div>
-                        <div class='noun-name'>{{ $noun['article'] . ' ' . $noun['noun'] . ' = the ' . $noun['english']}}</div>
-                    </div>
-                    @endforeach
-                </div>
-                <div class='col'>
-                </div>
-            </div>
-            <div class='row align-items-center'>
-                <div class='noun-list'>
 
-                </div>
-            </div>
-        </div>
+    <div class='d-flex flex-wrap justify-content-center py-3 mb-2'>
+        <h1>All Nouns</h1>
+    </div>
+    <div class='d-flex flex-wrap justify-content-center py-3 mb-3'>
+        <ul>
+        @foreach ($nouns as $noun)
+                <li><span test='noun-li'>{{ $noun['article'] . ' ' . $noun['noun'] . ' = the ' . $noun['english']}}</span></li>
+        @endforeach
+        </ul>
     </div>
 
 @endsection

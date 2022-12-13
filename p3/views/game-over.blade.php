@@ -5,44 +5,22 @@
 @endsection
 
 @section('content')
-   <div class='container-fluid text-center'>
-        <div class='container'>
-            <div class='row'>
-                <div class='col'>
-                </div>
-                <div class='col'>
-                    <h1>Game Over!</h1>
-                </div>
-                <div class='col'>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col'>
-                </div>
-                <div class='col'>
-                    <a href='/games'>
-                        <button class='btn btn-info' type='submit'>See results</button>
-                    </a>
-                </div>
-                <div class='col'>
-                </div>
-            </div>
-            <div class='row'>
-            </div>
-            <div class='row'>
-                <div class='col'>
-                </div>
-                <div class='col'>
-                    <div class='space'>
-                    <a href='/'>
-                        <button class='btn btn-primary' type='submit'>Play again</button>
-                    </a>
-                    </div>
-                </div>
-                <div class='col'>
-                </div>
-            </div>
+    <div class='d-flex flex-wrap justify-content-center py-3 mb-2'>
+        <h1><span test='game-over'>Game Over!</span></h1>
+    </div>
+    <div class='d-flex flex-wrap justify-content-center py-3 mb-3'>
+        <div>
+            <a href='/games'>
+                <button class='btn btn-primary' type='submit'>See results</button>
+            </a>
         </div>
+    </div>
+    <div class='d-flex flex-wrap justify-content-center py-3 mb-3'>
+        <div>
+            <a href='/'>
+                <button class='btn btn-primary' type='submit'>Play again</button>
+            </a>
+        </div>       
     </div>
 
 @endsection

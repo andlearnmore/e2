@@ -35,8 +35,8 @@ class NounsController extends Controller
                 $newGame = false;
                 $gameNumber = $gameNumber;
             }
-            dump($newGame);
 
+            # Determine round number and check if game is over.
             $round = $this->app->old('round');
             if (is_null($round)) {
                 $round = 1;

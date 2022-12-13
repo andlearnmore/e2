@@ -9,7 +9,7 @@ class p3Cest
 {
 
 
-    public function startGame(AcceptanceTester $I)
+    public function playGame(AcceptanceTester $I)
     {
         $I->amOnPage('/');
         $I->fillField('[test=das-radio]', 'das');
@@ -26,5 +26,49 @@ class p3Cest
             $I->seeElement('[test=incorrect-output]');
             $I->comment('The test guess is das but the correct article is '.$article);
         }
+
+        $I->click('[test=next-button]');
+        $I->seeElement('[test=game-form]');
     }
+
+    public function validateForm(AcceptanceTester $I)
+    {
+        $I->amOnPage('/');
+        $I->click('[test=guess-button]');
+        $I->seeElement('[test=validation-output]');
+    }
+
+    public function gameOver(AcceptanceTester $I)
+    {
+        $I->amOnPage('/');
+        for($i = 0; $i < 5; $i++) {
+            $I->fillField('[test=das-radio]', 'das');
+            $I->click('[test=guess-button]');
+            $I->click('[test=next-button]');
+        }
+        $I->comment('I played 5 rounds.');
+
+        $I->seeElement('[test=game-over]');
+    }
+
+    public function showNouns(AcceptanceTester $I)
+    {
+        $I->amOnPage('/all-nouns');
+
+        $nounCount = count($I->grabMultiple('[test=noun-li]'));
+        $I->assertGreaterThanOrEqual(13, $nounCount);
+    }
+
+    public function showHistoryAndRoundDetails(AcceptanceTester $I)
+    {
+        $I->amOnPage('/games');
+
+        $gameCount = count($I->grabMultiple('[test=game-li]'));
+        $I->assertGreaterThanOrEqual(2, $gameCount);
+
+        $gameNumber = $I->grabTextFrom('[test=game-results-link]'); 
+        $I->click($gameNumber);
+        $I->see('Results');
+    }
+
 }
